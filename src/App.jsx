@@ -1,11 +1,12 @@
-import Navbar from "./components/Navbar";
-import Hero from "./features/HeroSection";
+import Home from "./pages/Home"
+
 
 function App() {
   return (
     <div>
-      <Navbar/>
-    <Hero />
+
+    <Home/>  
+    
     </div>
     
   )
