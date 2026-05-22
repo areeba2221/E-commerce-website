@@ -1,4 +1,8 @@
 import { useState } from "react";
+import BedRoom from '/src/assets/Bed Room.png';
+import DiningRoom from '/src/assets/Dining Room.png';
+import Dining from '/src/assets/wallDining.png';
+import Focus from '/src/assets/Focuse Zoon.png';
 
 const slides = [
   {
@@ -6,28 +10,28 @@ const slides = [
     number: "01",
     category: "Bed Room",
     title: "Inner Peace",
-    image: "/src/assets/Bed Room.png",
+    image: BedRoom,
   },
   {
     id: 2,
     number: "02",
     category: "Dining Room",
     title: "Warm Gather",
-    image: "/src/assets/Dining Room.png",
+    image: DiningRoom,
   },
   {
     id: 3,
     number: "03",
     category: "Dining Room",
     title: "Natural Light",
-    image: "/src/assets/wallDining.png",
+    image: Dining,
   },
   {
     id: 4,
     number: "04",
     category: "Study Room",
     title: "Focus Zone",
-    image: "/src/assets/Focuse Zoon.png",
+    image: Focus,
   },
 ];
 

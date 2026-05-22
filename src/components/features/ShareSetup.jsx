@@ -1,3 +1,14 @@
+import Shelfroom from '/src/assets/Rectangle 36.png';
+import Diningroom from '/src/assets/Dining.png';
+import Bedroom from '/src/assets/BedRoom.png';
+import Brickwall from '/src/assets/wallDining.png';
+import Frame from '/src/assets/Frame.png';
+import Kitchen from '/src/assets/Kitchen.png';
+import Desktop from '/src/assets/Desktop.png';
+import Rectangle from '/src/assets/Rectangle 37.png';
+import Vase from '/src/assets/Vase.png';
+
+
 export default function ShareSetup() {
   return (
     <section className="w-full bg-white py-14 overflow-hidden select-none">
@@ -16,7 +27,7 @@ export default function ShareSetup() {
           <div className="flex items-end gap-4 w-full">
             <div className="w-[80px] h-[382px] shrink-0 overflow-hidden group relative cursor-pointer rounded-sm">
               <img 
-                src="/src/assets/Rectangle 36.png" 
+                src={Shelfroom} 
                 alt="Shelf room" 
                 className="w-full h-full object-cover object-right transition-transform duration-500 group-hover:scale-105"
               />
@@ -24,7 +35,7 @@ export default function ShareSetup() {
             </div>
             <div className="w-[414px] h-[312px] shrink-0 overflow-hidden group relative cursor-pointer rounded-sm">
               <img 
-                src="/src/assets/Desktop.png" 
+                src={Desktop} 
                 alt="Desk setup with laptop and radio" 
                 className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
               />
@@ -35,7 +46,7 @@ export default function ShareSetup() {
           <div className="flex items-start gap-4 w-full">
             <div className="w-[180px] h-[323px] shrink-0 overflow-hidden group relative cursor-pointer rounded-sm">
               <img 
-                src="/src/assets/Rectangle 37.png" 
+                src={Rectangle} 
                 alt="Vintage armchair" 
                 className="w-full h-full object-cover object-right transition-transform duration-500 group-hover:scale-105"
               />
@@ -43,7 +54,7 @@ export default function ShareSetup() {
             </div>
             <div className="w-[314px] h-[242px] shrink-0 overflow-hidden group relative cursor-pointer rounded-sm">
               <img 
-                src="/src/assets/Vase.png" 
+                src={Vase} 
                 alt="Vase and camera on stool" 
                 className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
               />
@@ -54,7 +65,7 @@ export default function ShareSetup() {
 
         <div className="w-[295px] h-[392px] shrink-0 overflow-hidden group relative cursor-pointer rounded-sm">
           <img 
-            src="/src/assets/Dining.png" 
+            src={Diningroom} 
             alt="Dining room centerpiece" 
             className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
           />
@@ -65,7 +76,7 @@ export default function ShareSetup() {
           <div className="flex items-end gap-4 w-full">
             <div className="w-[290px] h-[348px] shrink-0 overflow-hidden group relative cursor-pointer rounded-sm">
               <img 
-                src="/src/assets/BedRoom.png" 
+                src={Bedroom} 
                 alt="Bedroom cozy setup" 
                 className="w-full h-full object-cover transition-transform duration-500 
                 group-hover:scale-105"/>
@@ -73,7 +84,7 @@ export default function ShareSetup() {
             </div>
             <div className="w-[434px] h-[433px] shrink-0 overflow-hidden group relative cursor-pointer rounded-sm">
               <img 
-                src="/src/assets/wallDining.png" 
+                src={Brickwall} 
                 alt="Brick wall dining daylight" 
                 className="w-full h-full object-cover transition-transform duration-500 
                 group-hover:scale-105"/>
@@ -84,7 +95,7 @@ export default function ShareSetup() {
           <div className="flex items-start gap-4 w-full">
             <div className="w-[178px] h-[242px] shrink-0 overflow-hidden group relative cursor-pointer rounded-sm">
               <img 
-                src="/src/assets/Frame.png" 
+                src={Frame} 
                 alt="Frame mockup with vase" 
                 className="w-full h-full object-cover transition-transform duration-500 
                 group-hover:scale-105"
@@ -95,7 +106,7 @@ export default function ShareSetup() {
             <div className="w-[258px] h-[196px] shrink-0 overflow-hidden group relative cursor-pointer 
             rounded-sm">
               <img 
-                src="/src/assets/Kitchen.png" 
+                src={Kitchen}
                 alt="Kitchen wall geometric tiles" 
                 className="w-full h-full object-cover transition-transform duration-500
                  group-hover:scale-105"/>

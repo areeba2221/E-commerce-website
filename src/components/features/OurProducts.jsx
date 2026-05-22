@@ -1,4 +1,13 @@
 import { useState } from "react";
+import Syltherine from '/src/assets/syltherines.png';
+import Leviosa from '/src/assets/image 2.png';
+import Lolito from '/src/assets/Lolito.png';
+import Respira from '/src/assets/Respira.png';
+import Grifo from '/src/assets/Grifo.png';
+import Muggo from '/src/assets/Muggo.png';
+import Pingky from '/src/assets/Pingky.png';
+import Potty from '/src/assets/Potty.png';
+
 
 const products = [
   {
@@ -8,7 +17,8 @@ const products = [
     price: "Rp 2.500.000",
     originalPrice: "Rp 3.500.000",
     badge: { label: "-30%", type: "discount" },
-    image: "/src/assets/syltherines.png",
+    image: Syltherine,
+    
   },
   {
     id: 2,
@@ -17,7 +27,7 @@ const products = [
     price: "Rp 2.500.000",
     originalPrice: null,
     badge: null,
-    image: "/src/assets/image 2.png",
+    image: Leviosa,
     hovered: true,
   },
   {
@@ -27,7 +37,7 @@ const products = [
     price: "Rp 7.000.000",
     originalPrice: "Rp 14.000.000",
     badge: { label: "-50%", type: "discount" },
-    image: "/src/assets/Lolito.png",
+    image: Lolito,
   },
   {
     id: 4,
@@ -36,7 +46,7 @@ const products = [
     price: "Rp 500.000",
     originalPrice: null,
     badge: { label: "New", type: "new" },
-    image: "/src/assets/Respira.png",
+    image: Respira,
   },
   {
     id: 5,
@@ -45,7 +55,7 @@ const products = [
     price: "Rp 1.500.000",
     originalPrice: null,
     badge: null,
-    image: "/src/assets/Grifo.png",
+    image: Grifo,
   },
   {
     id: 6,
@@ -54,7 +64,7 @@ const products = [
     price: "Rp 150.000",
     originalPrice: null,
     badge: { label: "New", type: "new" },
-    image: "/src/assets/Muggo.png",
+    image: Muggo,
   },
   {
     id: 7,
@@ -63,7 +73,7 @@ const products = [
     price: "Rp 7.000.000",
     originalPrice: "Rp 14.000.000",
     badge: { label: "-50%", type: "discount" },
-    image: "/src/assets/Pingky.png",
+    image: Pingky,
   },
   {
     id: 8,
@@ -72,7 +82,7 @@ const products = [
     price: "Rp 500.000",
     originalPrice: null,
     badge: { label: "New", type: "new" },
-    image: "/src/assets/Potty.png",
+    image: Potty,
   },
 ];
 
