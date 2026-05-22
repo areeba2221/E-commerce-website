@@ -6,8 +6,8 @@ import livingRoom from "/src/assets/Image-living room.png"
 const BrowseRange = () => {
   return (
     <section className="py-20 px-6 bg-white">
-      <div className="max-w-7xl mx-auto">
-        <h2 className="section-title justify-center items-center flex font-bold text-[32px]">
+      <div className="max-w-7xl mx-auto">      
+        <h2 className="section-title justify-center items-center flex font-bold text-[32px] text-[#333333]">
             Browse The Range</h2>
         <p className="section-subtitle justify-center items-center flex mb-12 text-[#666666] text-[20px]">
           Lorem ipsum dolor sit amet, consectetur adipiscing elit.

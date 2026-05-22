@@ -119,24 +119,26 @@ function ProductCard({ product }) {
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}>
       
-      <div className="relative overflow-hidden aspect-[4/3]">
+      <div className="relative overflow-hidden aspect-4/3">
         <img
           src={product.image}
           alt={product.name}
-          className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
-        />
+          className="w-full h-full object-cover transition-transform duration-500 
+          group-hover:scale-105" />
         {product.badge && (
           <span
-            className={`absolute top-3 right-3 w-10 h-10 rounded-full flex items-center justify-center text-white text-xs font-semibold z-10
+            className={`absolute top-3 right-3 w-10 h-10 rounded-full flex items-center
+               justify-center text-white text-xs font-semibold z-10
               ${product.badge.type === "new" ? "bg-[#2EC1AC]" : "bg-[#E97171]"}`}>
             {product.badge.label}
           </span>
         )}
         <div
-          className={`absolute inset-0 bg-black/40 flex flex-col items-center justify-center gap-4 transition-opacity duration-300
-            ${isHovered ? "opacity-100" : "opacity-0"}`}
-        >
-          <button className="bg-white text-[#B88E2F] font-semibold text-sm px-10 py-3 hover:bg-[#B88E2F] hover:text-white transition-colors duration-200">
+          className={`absolute inset-0 bg-[#3A3A3A] flex flex-col items-center justify-center 
+            gap-4 transition-opacity duration-300
+            ${isHovered ? "opacity-100" : "opacity-0"}`}>
+          <button className="bg-white text-[#B88E2F] font-semibold text-[16px] px-10 py-3
+           hover:bg-[#B88E2F] hover:text-white transition-colors duration-200">
             Add to cart
           </button>
           <div className="flex items-center gap-4 text-white text-sm font-medium">
@@ -183,7 +185,7 @@ export default function OurProducts() {
       </div>
 
       <div className="flex justify-center mt-12">
-        <button className="border w-[245px] h-[48px] border-[#B88E2F] text-[#B88E2F] font-semibold px-16 py-3 
+        <button className="border w-61.25 h-12 border-[#B88E2F] text-[#B88E2F] font-semibold px-16 py-3 
         text-[16px] leading-[150%] tracking-widest hover:bg-[#B88E2F] hover:text-white transition-colors duration-200">
           Show More
         </button>
