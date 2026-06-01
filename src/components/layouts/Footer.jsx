@@ -1,4 +1,10 @@
 import { useState } from "react";
+import {
+  footerLinks,
+  footerHelpLinks,
+  footerAddress,
+  footerCopyright,
+} from "/src/data/Data";
 
 export default function Footer() {
   const [email, setEmail] = useState("");
@@ -14,17 +20,18 @@ export default function Footer() {
               Funiro.
             </h1>
             <p className="text-[#9F9F9F] gap-10 w-[285px] pt-[50px] font-medium text-[16px] leading-relaxed">
-              400 University Drive Suite 200 Coral Gables,
+              {footerAddress.line1}
             </p>
+
             <p className="text-[#9F9F9F] w-[285px] font-medium text-[16px] leading-relaxed">
-              FL 33134 USA
+              {footerAddress.line2}
             </p>
           </div>
 
           <div className="flex flex-col gap-10 ml-[136px]">
             <h3 className="text-[#9F9F9F] text-[16px] font-normal">Links</h3>
             <nav className="flex flex-col gap-10">
-              {["Home", "Shop", "About", "Contact"].map((link) => (
+              {footerLinks.map((link) => (
                 <a
                   key={link}
                   href="#"
@@ -39,7 +46,7 @@ export default function Footer() {
           <div className="flex flex-col gap-10 ml-8">
             <h3 className="text-[#9F9F9F] text-[16px] font-normal">Help</h3>
             <nav className="flex flex-col gap-y-10">
-              {["Payment Options", "Returns", "Privacy Policies"].map((item) => (
+              {footerHelpLinks.map((item) => (
                 <a
                   key={item}
                   href="#"
@@ -51,10 +58,10 @@ export default function Footer() {
             </nav>
           </div>
 
-          <div className="flex flex-col gap-6 mr-12">
+          <div className="flex flex-col gap-5 mr-6">
             <h3 className="text-[#9F9F9F] text-[16px] font-medium">
-                Newsletter</h3>
-            <div className="flex items-end gap-3">
+              Newsletter</h3>
+            <div className="flex items-end gap-2">
               <div className="flex-1 flex flex-col">
                 <input
                   type="email"
@@ -78,7 +85,7 @@ export default function Footer() {
         <div className="border-t border-[#D9D9D9]" />
         <div className="pt-6">
           <p className="text-[#000000] text-[16px]">
-            2023 furino. All rights reverved
+            {footerCopyright}
           </p>
         </div>
 

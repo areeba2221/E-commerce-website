@@ -1,49 +1,23 @@
 import { useState } from "react";
-import BedRoom from '/src/assets/Bed Room.png';
-import DiningRoom from '/src/assets/Dining Room.png';
-import Dining from '/src/assets/wallDining.png';
-import Focus from '/src/assets/Focuse Zoon.png';
+import {
+  inspirationSlides,
+  inspirationContent,
+} from "/src/data/Data";
 
-const slides = [
-  {
-    id: 1,
-    number: "01",
-    category: "Bed Room",
-    title: "Inner Peace",
-    image: BedRoom,
-  },
-  {
-    id: 2,
-    number: "02",
-    category: "Dining Room",
-    title: "Warm Gather",
-    image: DiningRoom,
-  },
-  {
-    id: 3,
-    number: "03",
-    category: "Dining Room",
-    title: "Natural Light",
-    image: Dining,
-  },
-  {
-    id: 4,
-    number: "04",
-    category: "Study Room",
-    title: "Focus Zone",
-    image: Focus,
-  },
-];
+import {
+  ArrowRightIcon,
+  ChevronRightIcon,
+} from "/src/assets/Svg";
 
 export default function Inspirations() {
   const [current, setCurrent] = useState(0);
 
-  const next = () => setCurrent((prev) => (prev + 1) % slides.length);
-  const prev = () => setCurrent((prev) => (prev - 1 + slides.length) % slides.length);
+  const next = () => setCurrent((prev) => (prev + 1) % inspirationSlides.length);
+  const prev = () => setCurrent((prev) => (prev - 1 + inspirationSlides.length) % inspirationSlides.length);
 
-  const mainSlide = slides[current];
-  const nextSlide = slides[(current + 1) % slides.length];
-  const nextNextSlide = slides[(current + 2) % slides.length];
+  const mainSlide = inspirationSlides[current];
+  const nextSlide = inspirationSlides[(current + 1) % inspirationSlides.length];
+  const nextNextSlide = inspirationSlides[(current + 2) % inspirationSlides.length];
 
   return (
     <section
@@ -54,14 +28,14 @@ export default function Inspirations() {
         <div className="w-[422px] pr-10 shrink-0">
           <h2
             className="text-[40px] font-bold leading-tight text-[#3A3A3A] mb-4">
-            50+ Beautiful rooms inspiration
+            {inspirationContent.title}
           </h2>
           <p className="text-[#616161] text-[16px] leading-[150%] mb-8 max-w-[368px]">
-            Our designer already made a lot of beautiful prototipe of rooms that inspire you
+          {inspirationContent.description}
           </p>
           <button className="bg-[#B88E2F] hover:bg-[#9a7526] transition-colors text-white 
           text-sm font-semibold px-10 py-4 tracking-wide w-[176px]">
-            Explore More
+            {inspirationContent.buttonText}
           </button>
         </div>
 
@@ -89,11 +63,8 @@ export default function Inspirations() {
                   onClick={next}
                   className="bg-[#B88E2F] hover:bg-[#9a7526] transition-colors text-white 
                   w-12 h-12 flex items-center mt-11 justify-center shrink-0" >
-                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" 
-                  fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" 
-                  strokeLinejoin="round" className="lucide 
-                  lucide-arrow-right-icon lucide-arrow-right"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
-                </button>
+                    <ArrowRightIcon />
+                  </button>
             </div>
             
           </div>
@@ -124,15 +95,13 @@ export default function Inspirations() {
             onClick={next}
             className="absolute right-0 top-1/2 -translate-y-1/2 bg-white shadow-lg w-12 h-12 
             rounded-full flex items-center justify-center hover:bg-gray-50 transition z-10">
-            <svg className="w-5 h-5 text-[#3A3A3A]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-            </svg>
+            <ChevronRightIcon />
           </button>
         </div>
         
       </div>
       <div className=" relative flex justify-end max-w-7xl mx-auto px-8 gap-2">
-        {slides.map((_, i) => (
+        {inspirationSlides.map((_, i) => (
           <button
             key={i}
             onClick={() => setCurrent(i)}
