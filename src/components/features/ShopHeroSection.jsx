@@ -1,5 +1,5 @@
 // import heroimage from '/src/assets/Rectangle 1.png';
-import { shopHeroData } from "/src/Data/data";
+import { shopHeroData } from "/src/data/Data";
 import { RightArrow } from "/src/assets/Svg";
 
 const ShopHeroSection = () => {
