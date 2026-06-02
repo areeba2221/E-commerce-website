@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { shopFilterData } from "/src/Data/data";
+import { shopFilterData } from "/src/data/Data";
 import { FilterRing, Grid, Viewlist } from "/src/assets/Svg";
 
 const ShopFilterBar = () => {
