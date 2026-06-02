@@ -33,6 +33,7 @@ import Grifo from "/src/assets/Grifo.png";
 import Muggo from "/src/assets/Muggo.png";
 import Pingky from "/src/assets/Pingky.png";
 import Potty from "/src/assets/Potty.png";
+import SideSofa from "/src/assets/side sofa.png"
 
 export const productsData = [
   {
@@ -43,6 +44,7 @@ export const productsData = [
     originalPrice: "Rp 3.500.000",
     badge: { label: "-30%", type: "discount" },
     image: Syltherine,
+    images: [SideSofa] 
   },
   {
     id: 2,
@@ -256,6 +258,36 @@ export const productData = [
   },
   
 ];
+
+//ShopHeroSection Data
+import heroimage from "/src/assets/Rectangle 1.png";
+
+export const shopHeroData = {
+  image: heroimage,
+  title: "Shop",
+  breadcrumb: {
+    home: "Home",
+    current: "Shop",
+  },
+};
+
+//ShopFilterBar Data
+export const shopFilterData = {
+  filterLabel: "Filter",
+  resultText: "Showing 1–16 of 32 results",
+  showLabel: "Show",
+  sortLabel: "Short by",
+
+  showOptions: [16, 32],
+
+  sortOptions: [
+    "Default",
+    "Price: Low to High",
+    "Price: High to Low",
+    "Newest",
+    "Best Selling",
+  ],
+};
 
 
 

@@ -1,11 +1,12 @@
-import heroimage from '/src/assets/Rectangle 1.png';
+// import heroimage from '/src/assets/Rectangle 1.png';
+import { shopHeroData } from "/src/Data/data";
 import { RightArrow } from "/src/assets/Svg";
 
 const ShopHeroSection = () => {
     return (
         <div className="relative w-full h-64 md:h-72 overflow-hidden">
       <img
-        src={heroimage}
+        src={shopHeroData.image}
         alt="Shop banner"
         className="absolute inset-0 w-full h-full object-cover"/>
 
@@ -16,7 +17,7 @@ const ShopHeroSection = () => {
       <div className="relative z-10 flex flex-col items-center justify-center h-full gap-3">
      
         <h1 className="text-black text-[48px] md:text-5xl font-medium leading-[100%]">
-          Shop
+          {shopHeroData.title}
         </h1>
 
         
@@ -25,12 +26,12 @@ const ShopHeroSection = () => {
             href="/"
             className="text-[#000000] text-[16px] hover:text-white 
             font-medium leading-[100%] transition-colors duration-200">
-            Home
+            {shopHeroData.breadcrumb.home}
           </a>
           <RightArrow/>
           
           <span className="text-[#000000] text-[16px] font-light leading-[100%]">
-            Shop</span>
+            {shopHeroData.breadcrumb.current}</span>
         </nav>
       </div>
     </div>

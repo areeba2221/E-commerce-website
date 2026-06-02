@@ -1,5 +1,6 @@
 import { useState } from "react";
-import { FilterRing, Grid , Viewlist} from "/src/assets/Svg";
+import { shopFilterData } from "/src/Data/data";
+import { FilterRing, Grid, Viewlist } from "/src/assets/Svg";
 
 const ShopFilterBar = () => {
     const [view, setView] = useState("grid");
@@ -13,42 +14,42 @@ const ShopFilterBar = () => {
                 <button className="flex items-center gap-2 text-[20px] font-normal text-[#000000]
                  hover:text-[#C8A96E] transition-colors">
                     <FilterRing />
-                    Filter
+                    {shopFilterData.filterLabel}
                 </button>
 
                 <button
                     onClick={() => setView("grid")}
-                    className={`transition-colors ${view === "grid" ? "text-[#000000]" : 
+                    className={`transition-colors ${view === "grid" ? "text-[#000000]" :
                         "text-gray-400 hover:text-[#C8A96E]"}`}>
-                  <Grid/>  
+                    <Grid />
                 </button>
 
                 <button
                     onClick={() => setView("list")}
-                    className={`transition-colors ${view === "list" ? "text-[#000000]" : 
+                    className={`transition-colors ${view === "list" ? "text-[#000000]" :
                         "text-gray-400 hover:text-[#C8A96E]"}`}
                 >
-                   <Viewlist/> 
+                    <Viewlist />
                 </button>
 
                 <div className="w-px h-6 bg-[#9F9F9F]" />
 
                 <span className="text-[16px] text-[#000000] font-normal">
-                    Showing 1–16 of 32 results</span>
+                    {shopFilterData.resultText}</span>
             </div>
 
             <div className="flex items-center gap-3 px-18">
                 <span className="text-[20px] text-[#000000] font-normal">
-                    Show</span>
+                    {shopFilterData.showLabel}</span>
 
                 <div className="flex items-center">
-                    {[16, 32].map((n) => (
+                    {shopFilterData.showOptions.map((n) => (
                         <button
                             key={n}
                             onClick={() => setShow(n)}
                             className={`w-10 h-9 text-sm font-medium border transition-colors ${show === n
-                                    ? "bg-white border-gray-300 text-gray-900"
-                                    : "border-transparent text-gray-400 hover:text-gray-600"
+                                ? "bg-white border-gray-300 text-gray-900"
+                                : "border-transparent text-gray-400 hover:text-gray-600"
                                 }`} >
                             {n}
                         </button>
@@ -56,14 +57,12 @@ const ShopFilterBar = () => {
                 </div>
 
                 <span className="text-[20px] text-[#000000] font-normal">
-                    Short by</span>
+                    {shopFilterData.sortLabel}</span>
 
                 <select className="h-9 px-3 text-[20px] text-gray-400 bg-white border border-gray-200 focus:outline-none focus:border-gray-400 cursor-pointer">
-                    <option>Default</option>
-                    <option>Price: Low to High</option>
-                    <option>Price: High to Low</option>
-                    <option>Newest</option>
-                    <option>Best Selling</option>
+                    {shopFilterData.sortOptions.map((option) => (
+                        <option key={option}>{option}</option>
+                    ))}
                 </select>
             </div>
         </div>
