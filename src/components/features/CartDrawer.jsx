@@ -1,12 +1,13 @@
 import { useCart } from "/src/context/CartContext";
 import { Link } from "react-router-dom";
+import { Cross, CircleCross } from "/src/assets/Svg";
 
 export default function CartDrawer() {
   const { cartItems, isCartOpen, setIsCartOpen, removeFromCart, subtotal } = useCart();
 
   return (
     <>
-      {/* Overlay */}
+    
       {isCartOpen && (
         <div
           className="fixed inset-0 bg-black/20 z-40"
@@ -14,19 +15,15 @@ export default function CartDrawer() {
         />
       )}
 
-      {/* Drawer */}
       <div className={`fixed top-0 right-0 h-full w-[400px] bg-white z-50 shadow-2xl
         transform transition-transform duration-300 font-Poppins
         ${isCartOpen ? "translate-x-0" : "translate-x-full"}`}>
 
-        {/* Header */}
         <div className="flex items-center justify-between px-8 py-6 border-b border-[#D9D9D9]">
           <h2 className="text-[24px] font-semibold">Shopping Cart</h2>
           <button onClick={() => setIsCartOpen(false)} className="text-[#9F9F9F] hover:text-black">
 
-            <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
-              <path d="M1 1l16 16M17 1L1 17" stroke="currentColor" strokeWidth="2" strokeLinecap="round"/>
-            </svg>
+            <Cross/>
           </button>
         </div>
 
@@ -49,9 +46,8 @@ export default function CartDrawer() {
                 <button
                   onClick={() => removeFromCart(item.id, item.size, item.color)}
                   className="w-6 h-6 rounded-full bg-[#9F9F9F] flex items-center justify-center hover:bg-black transition-colors flex-shrink-0">
-                  <svg width="10" height="10" viewBox="0 0 10 10" fill="none">
-                    <path d="M1 1l8 8M9 1L1 9" stroke="white" strokeWidth="1.5" strokeLinecap="round"/>
-                  </svg>
+                  
+                  <CircleCross/>
                 </button>
               </div>
             ))
