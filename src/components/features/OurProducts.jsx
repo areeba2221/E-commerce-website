@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom"; 
 import { productsData, productsSectionData } from "/src/data/Data";
 
 import {
@@ -9,9 +10,16 @@ import {
 
 function ProductCard({ product }) {
   const [isHovered, setIsHovered] = useState(false);
+  const navigate = useNavigate(); 
+
+  const [quantity, setQuantity] = useState(1);
+    const [selectedSize, setSelectedSize] = useState(" ");
+    const [selectedColor, setSelectedColor] = useState(" ");
+
 
   return (
     <div
+    onClick={() => navigate(`/product/${product.id}`)}
       className="group bg-[#F4F5F7] rounded-sm overflow-hidden cursor-pointer relative"
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}>
@@ -34,18 +42,24 @@ function ProductCard({ product }) {
           className={`absolute inset-0 bg-[#3A3A3A] flex flex-col items-center justify-center 
             gap-4 transition-opacity duration-300
             ${isHovered ? "opacity-100" : "opacity-0"}`}>
-          <button className="bg-white text-[#B88E2F] font-semibold text-[16px] px-10 py-3
+          <button 
+           onClick={() => addToCart ( quantity, selectedSize, selectedColor)}
+          className="bg-white text-[#B88E2F] font-semibold text-[16px] px-10 py-3
            hover:bg-[#B88E2F] hover:text-white transition-colors duration-200">
             Add to cart
           </button>
           <div className="flex items-center gap-4 text-white text-sm font-medium">
-            <button className="flex items-center gap-1 hover:text-[#B88E2F] transition-colors">
+            <button 
+            className="flex items-center gap-1 hover:text-[#B88E2F] transition-colors">
               <ShareIcon /> Share
             </button>
-            <button className="flex items-center gap-1 hover:text-[#B88E2F] transition-colors">
+            <button 
+            className="flex items-center gap-1 hover:text-[#B88E2F] transition-colors">
               <CompareIcon /> Compare
             </button>
-            <button className="flex items-center gap-1 hover:text-[#B88E2F] transition-colors">
+            <button 
+            
+            className="flex items-center gap-1 hover:text-[#B88E2F] transition-colors">
               <ProductHeartIcon /> Like
             </button>
           </div>

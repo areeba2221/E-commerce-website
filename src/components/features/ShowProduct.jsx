@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useParams, Link } from "react-router-dom";
-import { productData } from "/src/data/Data";
+import { productsData } from "/src/data/Data";
 import { useCart } from "/src/context/CartContext";
 import { StarIcon, RightArrow, Facebook, Linkedin, Twitter } from "/src/assets/Svg";
 
@@ -9,7 +9,7 @@ export default function ProductDetails() {
     const { id } = useParams();
 
     const baseId = id ? id.split("-")[0] : "";
-    const product = productData.find((p) => String(p.id) === baseId) || productData[0];
+    const product = productsData.find((p) => String(p.id) === baseId) || productData[0];
 
     const [quantity, setQuantity] = useState(1);
     const [selectedSize, setSelectedSize] = useState("L");
@@ -46,7 +46,7 @@ export default function ProductDetails() {
                 <div className="w-px h-7 bg-[#9F9F9F]" />
                 <span className="text-black font-medium">{product.name}</span>
             </nav>
-            <main className="max-w-[1440px] mx-auto px-4 md:px-16 py-10 font-Poppins ">
+            <main className="max-w-360 mx-auto px-4 md:px-16 py-10 font-Poppins ">
 
                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
 
@@ -89,7 +89,7 @@ export default function ProductDetails() {
                             <span className="text-[#9F9F9F] text-[13px]">5 Customer Reviews</span>
                         </div>
 
-                        <p className="text-[13px] text-black leading-relaxed max-w-[424px] mb-6">
+                        <p className="text-[13px] text-black leading-relaxed max-w-106 mb-6">
                             Setting the bar as one of the loudest speakers in its class, the Kilburn is a
                             compact, stout-hearted hero with a well-balanced audio which boasts a clear
                             midrange and extended highs for a sound.
@@ -131,7 +131,7 @@ export default function ProductDetails() {
                         <div className="flex flex-wrap items-center gap-4 pb-12 border-b
                          border-[#D9D9D9] mb-8">
                             <div className="flex items-center justify-between border border-[#9F9F9F] 
-                            rounded-[10px] w-[123px] h-[64px] px-4">
+                            rounded-[10px] w-30.75 h-16 px-4">
                                 <button
                                     onClick={() => setQuantity(prev => Math.max(1, prev - 1))}
                                     className="text-[16px] font-medium hover:text-[#B88E2F]">-</button>

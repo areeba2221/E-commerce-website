@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom"; 
-import { productData } from "/src/data/Data";
+import { productsData } from "/src/data/Data";
 
 import {
   ShareIcon,
@@ -81,7 +81,7 @@ function ProductCard({ product }) {
 }
 
 export default function ShopProducts () {
-  const repeatedProducts = [...productData, ...productData, ...productData, ...productData]
+  const repeatedProducts = [ ...productsData, ...productsData]
   .map((prod, index) => ({
     ...prod,
     id: `${prod.id}-${index}` 
@@ -90,11 +90,12 @@ export default function ShopProducts () {
   return (
     <section className="py-16 px-4 max-w-[1240px] mx-auto flex flex-col items-center gap-16">
       
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8 w-full">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 w-full">
         {repeatedProducts.map((product) => (
           <ProductCard key={product.id} product={product} />
         ))}
       </div>
+
 
       <div className="flex items-center gap-8 mt-4 text-[20px]">
         <button className="w-14 h-14 bg-[#B88E2F] text-white rounded-[10px] flex items-center justify-center font-normal transition-colors">

@@ -5,6 +5,7 @@ import Cart from "./pages/Cart";
 import SingleProduct from "./pages/SingleProduct";
 import { CartProvider } from "/src/context/CartContext";
 import CartDrawer from "./components/features/CartDrawer";
+import Checkout from "./pages/Checkout";
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
           <Route path="/shop" element={<Shop />} />
           <Route path="/product/:id" element={<SingleProduct />} />
           <Route path="/cart" element={<Cart/>}/>
+          <Route path="/checkout" element={<Checkout/>} />
         </Routes>
       </BrowserRouter>
     </CartProvider>

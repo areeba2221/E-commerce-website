@@ -271,3 +271,11 @@ export const CircleCross = () => (
                       <path d="M1 1l8 8M9 1L1 9" stroke="white" strokeWidth="1.5" strokeLinecap="round"/>
                     </svg>
 ); 
+
+//trash icon
+export const TrashIcon = () => (
+  <svg width="28" height="28" viewBox="0 0 28 28" fill="none">
+    <path d="M4 7h20M10 7V5a2 2 0 014 0v2M6 7l1.5 16h13L22 7H6zM11 12v7M17 12v7" 
+      stroke="#B88E2F" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"/>
+  </svg>
+);

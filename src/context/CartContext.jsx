@@ -20,7 +20,9 @@ export function CartProvider({ children }) {
       }
       return [...prev, { ...product, quantity, size: selectedSize, color: selectedColor }];
     });
+
     setIsCartOpen(true);
+    
   };
 
   const removeFromCart = (id, size, color) => {
@@ -35,7 +37,8 @@ export function CartProvider({ children }) {
   }, 0);
 
   return (
-    <CartContext.Provider value={{ cartItems, isCartOpen, setIsCartOpen, addToCart, removeFromCart, subtotal }}>
+    <CartContext.Provider 
+    value={{ cartItems,setCartItems, isCartOpen, setIsCartOpen, addToCart, removeFromCart, subtotal }}>
       {children}
     </CartContext.Provider>
   );
