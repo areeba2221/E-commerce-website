@@ -52,7 +52,7 @@ export default function CartSection() {
                     <div key={`${item.id}-${item.size}-${item.color}`}
                       className="grid grid-cols-[2fr_1fr_1fr_1fr_40px] items-center 
                       px-6 py-4 rounded-[10px] bg-white border border-transparent 
-                      hover:border-[#F9F1E7] transition-all">
+                      hover:border-[#F9F1E7] duration-300 ease-in-out">
 
                       <div className="flex items-center gap-4">
                         <div className="w-[105px] h-[105px] bg-[#F9F1E7] rounded-[10px] 
