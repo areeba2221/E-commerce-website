@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { getProducts } from "../../api/productAPI";
+import { getProducts } from "/src/api/productAPI";
 import { ShareIcon, CompareIcon, ProductHeartIcon } from "/src/assets/Svg";
 
 function ProductCard({ product }) {
