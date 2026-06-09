@@ -18,14 +18,14 @@ const Hero = () => {
           New Arrival
         </p>
 
-        <h1 className="text-[52px] md:text-6xl w-[559px]  font-bold text-[#B88E2F] leading-(65px)">
+        <h1 className="text-[52px] md:text-6xl w-139.75  font-bold text-[#B88E2F] leading-(65px)">
           Discover Our
         </h1>
-        <h1 className="text-[52px] md:text-6xl w-[559px]  font-bold text-[#B88E2F] leading-(65px) mb-5 ">
+        <h1 className="text-[52px] md:text-6xl w-139.75  font-bold text-[#B88E2F] leading-(65px) mb-5 ">
           New Collection
         </h1>
 
-        <p className="text-[#333333] text-[18px]  mb-12 leading-(24px) max-w-[546px] font-medium">
+        <p className="text-[#333333] text-[18px]  mb-12 leading-(24px) max-w-136.5 font-medium">
           Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut elit tellus, luctus nec ullamcorper mattis.
         </p>
 

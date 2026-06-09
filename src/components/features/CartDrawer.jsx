@@ -7,7 +7,6 @@ export default function CartDrawer() {
 
   return (
     <>
-    
       {isCartOpen && (
         <div
           className="fixed inset-0 bg-black/20 z-40"
@@ -15,18 +14,16 @@ export default function CartDrawer() {
         />
       )}
 
-      <div className={`fixed top-0 right-0 h-full w-[400px] bg-white z-50 shadow-2xl
+      <div className={`fixed top-0 right-0 h-full w-100 bg-white z-50 shadow-2xl
         transform transition-transform duration-300 font-Poppins
         ${isCartOpen ? "translate-x-0" : "translate-x-full"}`}>
 
         <div className="flex items-center justify-between px-8 py-6 border-b border-[#D9D9D9]">
           <h2 className="text-[24px] font-semibold">Shopping Cart</h2>
           <button onClick={() => setIsCartOpen(false)} className="text-[#9F9F9F] hover:text-black">
-
-            <Cross/>
+            <Cross />
           </button>
         </div>
-
 
         <div className="flex flex-col gap-6 px-8 py-6 overflow-y-auto max-h-[calc(100vh-220px)]">
           {cartItems.length === 0 ? (
@@ -34,21 +31,45 @@ export default function CartDrawer() {
           ) : (
             cartItems.map((item, i) => (
               <div key={i} className="flex items-center gap-4">
-                <div className="w-[105px] h-[105px] bg-[#F9F1E7] rounded-[10px] flex items-center justify-center p-2 flex-shrink-0">
-                  <img src={item.image} alt={item.name} className="w-full h-full object-contain mix-blend-multiply" />
+
+                <div className="w-26.25 h-26.25 bg-[#F9F1E7] rounded-[10px] flex items-center justify-center p-2 shrink-0">
+                  <img
+                    src={
+                      item.images?.[0]?.url ||  
+                      item.image            ||  
+                      "/placeholder.png"        
+                    }
+                    alt={item.name}
+                    className="w-full h-full object-contain mix-blend-multiply"
+                  />
                 </div>
+
                 <div className="flex-1">
                   <p className="text-[16px] font-medium text-black">{item.name}</p>
                   <p className="text-[14px] text-[#9F9F9F] mt-1">
-                    {item.quantity} x <span className="text-[#B88E2F]">{item.price}</span>
+                    {item.quantity} x{" "}
+                    <span className="text-[#B88E2F]">
+                      Rs. {Number(item.price)?.toLocaleString()}  
+                    </span>
                   </p>
+                  {item.size && (
+                    <p className="text-[12px] text-[#9F9F9F]">Size: {item.size}</p>
+                  )}
+                  {item.color && (
+                    <p className="text-[12px] text-[#9F9F9F]">Color: {item.color}</p>
+                  )}
                 </div>
+
                 <button
-                  onClick={() => removeFromCart(item.id, item.size, item.color)}
-                  className="w-6 h-6 rounded-full bg-[#9F9F9F] flex items-center justify-center hover:bg-black transition-colors flex-shrink-0">
-                  
-                  <CircleCross/>
+                  onClick={() => removeFromCart(
+                    item._id || item.id,   // ← _id pehle try karo
+                    item.size,
+                    item.color
+                  )}
+                  className="w-6 h-6 rounded-full bg-[#9F9F9F] flex items-center justify-center hover:bg-black transition-colors shrink-0">
+                  <CircleCross />
                 </button>
+
               </div>
             ))
           )}
@@ -59,10 +80,10 @@ export default function CartDrawer() {
             <div className="flex justify-between items-center mb-6">
               <span className="text-[16px] text-black">Subtotal</span>
               <span className="text-[16px] font-semibold text-[#B88E2F]">
-                Rs. {subtotal.toLocaleString("en-PK", { minimumFractionDigits: 2 })}
+                Rs. {subtotal?.toLocaleString("en-PK", { minimumFractionDigits: 2 })}
               </span>
             </div>
-            <div className="flex gap-3  ">
+            <div className="flex gap-3">
               <Link to="/cart" onClick={() => setIsCartOpen(false)}
                 className="flex-1 text-center border border-black rounded-full py-2 text-[13px] hover:bg-black hover:text-white transition-all">
                 Cart
@@ -78,6 +99,7 @@ export default function CartDrawer() {
             </div>
           </div>
         )}
+
       </div>
     </>
   );

@@ -23,28 +23,31 @@ const Navbar = () => {
     <nav className="w-full bg-white shadow-sm px-8 py-4">
       <div className="max-w-7xl mx-auto flex items-center justify-between">
 
-        <button onClick={() => setActivePage("Home")} 
-        style={{ background: "none", border: "none", cursor: "pointer", padding: 0 }}>
+        <button onClick={() => setActivePage("Home")}
+          style={{ background: "none", border: "none", cursor: "pointer", padding: 0 }}>
           <img src={myLogo} alt="Company Logo" />
         </button>
 
         <ul className="hidden md:flex items-center gap-10">
           {navLinks.map(({ label, path }) => (
             <li key={label}>
-              <NavLink to={path} onClick={() => setActivePage(label)}>
-                <span
-                  className="text-[16px] font-medium transition-colors duration-200 tracking-wide pb-1"
-                  style={{
-                    fontFamily: "'Poppins', sans-serif",
-                    cursor: "pointer",
-                    color: activePage === label ? "#C8A96E" : "#000000",
-                    borderBottom: activePage === label ? "2px solid #C8A96E" : "2px solid transparent",}}>
-                  {label}
-                </span>
+              <NavLink
+                to={path}
+                style={({ isActive }) => ({
+                  fontFamily: "'Poppins', sans-serif",
+                  cursor: "pointer",
+                  color: isActive ? "#C8A96E" : "#000000",
+                  borderBottom: isActive ? "2px solid #C8A96E" : "2px solid transparent",
+                })}
+                className="text-[16px] font-medium transition-colors duration-200 tracking-wide pb-1"
+              >
+                {label}
               </NavLink>
             </li>
           ))}
         </ul>
+
+
 
         <div className="hidden md:flex items-center gap-5 text-gray-700">
           <button className="hover:text-[#C8A96E] transition-colors duration-200">

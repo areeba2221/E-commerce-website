@@ -1,0 +1,5 @@
+Home.jsx → OurProducts   → getProducts() → Backend → MongoDB
+Shop.jsx → ShopProducts  → getProducts() → Backend → MongoDB
+SingleProduct.jsx → ShowProduct → getProduct(id) → Backend → MongoDB
+Cart.jsx → CartSection   → localStorage (no API needed)
+Checkout.jsx → CheckoutSection → localStorage (no API needed)

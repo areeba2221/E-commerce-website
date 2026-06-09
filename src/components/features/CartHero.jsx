@@ -17,7 +17,7 @@ const CartHero = () => {
             <img
         src={logo}
         alt="Shop banner"
-        className="absolute  w-[77px] h-[77px] object-cover"/>
+        className="absolute  w-19.25 h-19.25 object-cover"/>
         </div>
 
      
@@ -33,7 +33,7 @@ const CartHero = () => {
         <nav className="flex items-center gap-2">
           <a
             href="/"
-            className="text-[#000000] text-[16px] hover:text-white 
+            className="text-[#000000] text-[16px] hover:text-[#C8A96E]
             font-medium leading-[100%] transition-colors duration-200">
             {shopHeroData.breadcrumb.home}
           </a>
