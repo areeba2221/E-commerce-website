@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { useParams, Link } from "react-router-dom";
-import { getProduct } from "/src/api/productApi";         
+import { getProduct } from "/src/api/productAPI";         
 import { useCart } from "/src/context/CartContext";
 import { StarIcon, RightArrow, Facebook, Linkedin, Twitter } from "/src/assets/Svg";
 

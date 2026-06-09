@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { getProducts } from "/src/api/productApi";        
+import { getProducts } from "/src/api/productAPI";        
 import { productsSectionData } from "/src/data/Data";   
 import { ShareIcon, CompareIcon, ProductHeartIcon } from "/src/assets/Svg";
 
