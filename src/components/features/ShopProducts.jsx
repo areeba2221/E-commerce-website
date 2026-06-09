@@ -99,7 +99,7 @@ export default function ShopProducts() {
       })
       .catch(err => {
         console.log(err);
-        setError("Products load nahi hue");
+        setError("Products is not load");
         setLoading(false);
       });
   }, [currentPage]);                                  
