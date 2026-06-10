@@ -90,7 +90,7 @@ export default function ShopProducts() {
 
   useEffect(() => {
     setLoading(true);
-    getProducts(`?page=${currentPage}&limit=8`)        
+    getProducts(`?page=${currentPage}&limit=12`)        
       .then(res => {
         const data = res.data?.data || [];
         setProducts(Array.isArray(data) ? data : []);
