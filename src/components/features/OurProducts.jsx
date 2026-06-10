@@ -15,45 +15,56 @@ function ProductCard({ product }) {
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}>
       <div className="relative overflow-hidden aspect-4/3">
+  <img
+    src={product.images?.[0]?.url} 
+    alt={product.name}
+    className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+  />
 
-        <img
-          src={product.images?.[0]?.url} 
-          alt={product.name}
-          className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"/>
+  <div className={`absolute top-3 right-3 flex flex-col gap-2 z-10 transition-opacity duration-300 
+    ${isHovered ? "opacity-0 pointer-events-none" : "opacity-100"}`}>
+    {product.comparePrice && (
+      <span className="w-10 h-10 rounded-full flex items-center justify-center 
+        text-white text-xs font-semibold bg-[#E97171]">
+        Sale
+      </span>
+    )}
 
-        {product.comparePrice && (
-          <span className="absolute top-3 right-3 w-10 h-10 rounded-full flex items-center
-            justify-center text-white text-xs font-semibold z-10 bg-[#E97171]">
-            Sale
-          </span>
-        )}
+    {product.tags?.includes("new") && (
+  <span className="w-10 h-10 rounded-full flex items-center justify-center 
+    text-white text-xs font-semibold bg-[#2EC1AC]">
+    New
+  </span>
+)}
+  </div>
 
-        <div className={`absolute inset-0 bg-[#3A3A3A] bg-opacity-70 flex flex-col items-center 
-          justify-center gap-4 transition-opacity duration-300
-          ${isHovered ? "opacity-100" : "opacity-0"}`}>
-          <button
-            onClick={(e) => {
-              e.stopPropagation();                           
-              console.log("Add to cart:", product._id);
-            }}
-            className="bg-white text-[#B88E2F] font-semibold text-[16px] px-10 py-3
-              hover:bg-[#B88E2F] hover:text-white transition-colors duration-200">
-            Add to cart
-          </button>
+  <div className={`absolute inset-0 bg-[#3A3A3A] bg-opacity-70 flex flex-col items-center 
+    justify-center gap-4 transition-opacity duration-300
+    ${isHovered ? "opacity-100" : "opacity-0"}`}>
+    <button
+      onClick={(e) => {
+        e.stopPropagation();                           
+        console.log("Add to cart:", product._id);
+      }}
+      className="bg-white text-[#B88E2F] font-semibold text-[16px] px-10 py-3
+        hover:bg-[#B88E2F] hover:text-white transition-colors duration-200">
+      Add to cart
+    </button>
 
-          <div className="flex items-center gap-4 text-white text-sm font-medium">
-            <button className="flex items-center gap-1 hover:text-[#B88E2F] transition-colors">
-              <ShareIcon /> Share
-            </button>
-            <button className="flex items-center gap-1 hover:text-[#B88E2F] transition-colors">
-              <CompareIcon /> Compare
-            </button>
-            <button className="flex items-center gap-1 hover:text-[#B88E2F] transition-colors">
-              <ProductHeartIcon /> Like
-            </button>
-          </div>
-        </div>
-      </div>
+    <div className="flex items-center gap-4 text-white text-sm font-medium">
+      <button className="flex items-center gap-1 hover:text-[#B88E2F] transition-colors">
+        <ShareIcon /> Share
+      </button>
+      <button className="flex items-center gap-1 hover:text-[#B88E2F] transition-colors">
+        <CompareIcon /> Compare
+      </button>
+      <button className="flex items-center gap-1 hover:text-[#B88E2F] transition-colors">
+        <ProductHeartIcon /> Like
+      </button>
+    </div>
+  </div>
+</div>
+
 
       <div className="p-4 pb-6">
         <h3 className="font-bold text-[#3A3A3A] text-[24px] mb-1">{product.name}</h3>
