@@ -110,7 +110,7 @@ export default function OurProducts() {
       })
       .catch(err => {
         console.log(err);
-        setError("Products load nahi hue");
+        setError("Products is not load");
         isLoadMore ? setLoadingMore(false) : setLoading(false);
       });
   };
@@ -122,7 +122,7 @@ export default function OurProducts() {
   const handleShowMore = () => {
     const nextPage = page + 1;
     setPage(nextPage);
-    fetchProducts(nextPage, true);   // ← true = load more mode
+    fetchProducts(nextPage, true);  
   };
 
   if (loading) return <p className="text-center py-16">Loading...</p>;
