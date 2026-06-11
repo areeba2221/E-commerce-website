@@ -148,32 +148,34 @@ const CheckoutSection = () => {
           Billing details
         </h1>
 
-        <div className="flex flex-col gap-5">
-          <div className="flex gap-42 mt-9 mb-4">
+        <div className="flex flex-col gap-4">
+          <div className="flex gap-42 mt-9 mb-2">
             <h3 className="text-black text-[16px] font-semibold">First Name</h3>
             <h3 className="text-black text-[16px] font-semibold">Last Name</h3>
           </div>
           <div className="flex gap-8">
             <input type="text" name="firstName" value={form.firstName}
               onChange={handleChange} placeholder="First Name"
-              className="w-[211px] h-19 px-4 border border-[#9F9F9F] rounded-[10px] text-[20px] transition-all focus:outline-none focus:border-[#B88E2F]" />
+              className="w-[210px] h-15 px-4 border border-[#9F9F9F] rounded-[10px] text-[20px] 
+              transition-all focus:outline-none focus:border-[#B88E2F]" />
             <input type="text" name="lastName" value={form.lastName}
               onChange={handleChange} placeholder="Last Name"
-              className="w-[211px] h-19 px-4 border border-[#9F9F9F] rounded-[10px] text-[20px] transition-all focus:outline-none focus:border-[#B88E2F]" />
+              className="w-[210px] h-15 px-4 border border-[#9F9F9F] rounded-[10px] text-[20px] 
+              transition-all focus:outline-none focus:border-[#B88E2F]" />
           </div>
         </div>
 
-        <div className="flex flex-col gap-5">
-          <h3 className="text-black text-[16px] font-semibold mt-9 mb-2">Company Name (Optional)</h3>
+        <div className="flex flex-col gap-4">
+          <h3 className="text-black text-[16px] font-semibold mt-7 mb-2">Company Name (Optional)</h3>
           <input type="text" name="company" value={form.company}
             onChange={handleChange}
-            className="w-[453px] h-19 px-4 border border-[#9F9F9F] rounded-[10px] text-[20px] transition-all focus:outline-none focus:border-[#B88E2F]" />
+            className="w-[453px] h-15 px-4 border border-[#9F9F9F] rounded-[10px] text-[20px] transition-all focus:outline-none focus:border-[#B88E2F]" />
         </div>
 
-        <div className="flex flex-col gap-5">
-          <h3 className="text-black text-[16px] font-semibold mt-9 mb-2">Country / Region</h3>
+        <div className="flex flex-col gap-4">
+          <h3 className="text-black text-[16px] font-semibold mt-7 mb-2">Country / Region</h3>
           <select name="country" value={form.country} onChange={handleChange}
-            className="text-gray-400 w-[453px] h-19 px-4 border border-[#9F9F9F] rounded-[10px] text-[20px] transition-all focus:outline-none focus:border-[#B88E2F]">
+            className="text-gray-400 w-[453px] h-15 px-4 border border-[#9F9F9F] rounded-[10px] text-[20px] transition-all focus:outline-none focus:border-[#B88E2F]">
             <option value="">Select Country</option>
             {CheckoutData.sortOptions.map((option) => (
               <option key={option} value={option}>{option}</option>
@@ -181,24 +183,24 @@ const CheckoutSection = () => {
           </select>
         </div>
 
-        <div className="flex flex-col gap-5">
-          <h3 className="text-black text-[16px] font-semibold mt-9 mb-2">Street address</h3>
+        <div className="flex flex-col gap-4">
+          <h3 className="text-black text-[16px] font-semibold mt-7 mb-2">Street address</h3>
           <input type="text" name="street" value={form.street}
             onChange={handleChange}
-            className="w-[453px] h-19 px-4 border border-[#9F9F9F] rounded-[10px] text-[20px] transition-all focus:outline-none focus:border-[#B88E2F]" />
+            className="w-[453px] h-15 px-4 border border-[#9F9F9F] rounded-[10px] text-[20px] transition-all focus:outline-none focus:border-[#B88E2F]" />
         </div>
 
-        <div className="flex flex-col gap-5">
-          <h3 className="text-black text-[16px] font-semibold mt-9 mb-2">Town / City</h3>
+        <div className="flex flex-col gap-4">
+          <h3 className="text-black text-[16px] font-semibold mt-7 mb-2">Town / City</h3>
           <input type="text" name="city" value={form.city}
             onChange={handleChange}
-            className="w-[453px] h-19 px-4 border border-[#9F9F9F] rounded-[10px] text-[20px] transition-all focus:outline-none focus:border-[#B88E2F]" />
+            className="w-[453px] h-15 px-4 border border-[#9F9F9F] rounded-[10px] text-[20px] transition-all focus:outline-none focus:border-[#B88E2F]" />
         </div>
 
-        <div className="flex flex-col gap-5">
-          <h3 className="text-black text-[16px] font-semibold mt-9 mb-2">Province</h3>
+        <div className="flex flex-col gap-4">
+          <h3 className="text-black text-[16px] font-semibold mt-7 mb-2">Province</h3>
           <select name="province" value={form.province} onChange={handleChange}
-            className="text-gray-400 w-[453px] h-19 px-4 border border-[#9F9F9F] rounded-[10px] text-[20px] transition-all focus:outline-none focus:border-[#B88E2F]">
+            className="text-gray-400 w-[453px] h-15 px-4 border border-[#9F9F9F] rounded-[10px] text-[20px] transition-all focus:outline-none focus:border-[#B88E2F]">
             <option value="">Select Province</option>
             {CheckoutData.sortOptionProvince.map((option) => (
               <option key={option} value={option}>{option}</option>
@@ -206,30 +208,31 @@ const CheckoutSection = () => {
           </select>
         </div>
 
-        <div className="flex flex-col gap-5">
-          <h3 className="text-black text-[16px] font-semibold mt-9 mb-2">ZIP code</h3>
+        <div className="flex flex-col gap-4">
+          <h3 className="text-black text-[16px] font-semibold mt-7 mb-2">ZIP code</h3>
           <input type="text" name="zip" value={form.zip}
             onChange={handleChange}
-            className="w-[453px] h-19 px-4 border border-[#9F9F9F] rounded-[10px] text-[20px] transition-all focus:outline-none focus:border-[#B88E2F]" />
+            className="w-[453px] h-15 px-4 border border-[#9F9F9F] rounded-[10px] text-[20px] transition-all focus:outline-none focus:border-[#B88E2F]" />
         </div>
 
-        <div className="flex flex-col gap-5">
-          <h3 className="text-black text-[16px] font-semibold mt-9 mb-2">Phone</h3>
+        <div className="flex flex-col gap-4">
+          <h3 className="text-black text-[16px] font-semibold mt-7 mb-2">Phone</h3>
           <input type="tel" name="phone" value={form.phone}
             onChange={handleChange}
-            className="w-[453px] h-19 px-4 border border-[#9F9F9F] rounded-[10px] text-[20px] transition-all focus:outline-none focus:border-[#B88E2F]" />
+            className="w-[453px] h-15 px-4 border border-[#9F9F9F] rounded-[10px] text-[20px] transition-all focus:outline-none focus:border-[#B88E2F]" />
         </div>
 
-        <div className="flex flex-col gap-5">
-          <h3 className="text-black text-[16px] font-semibold mt-9 mb-2">Email address</h3>
+        <div className="flex flex-col gap-4">
+          <h3 className="text-black text-[16px] font-semibold mt-7 mb-2">Email address</h3>
           <input type="email" name="email" value={form.email}
             onChange={handleChange}
-            className="w-[453px] h-19 px-4 border border-[#9F9F9F] rounded-[10px] text-[20px] transition-all focus:outline-none focus:border-[#B88E2F]" />
+            className="w-[453px] h-15 px-4 border border-[#9F9F9F] rounded-[10px] text-[20px] transition-all focus:outline-none focus:border-[#B88E2F]" />
         </div>
 
         <input type="text" name="notes" value={form.notes}
           onChange={handleChange} placeholder="Additional information"
-          className="w-[453px] h-19 px-4 border border-[#9F9F9F] rounded-[10px] text-[20px] transition-all focus:outline-none focus:border-[#B88E2F] mt-17" />
+          className="w-[453px] h-15 px-4 border border-[#9F9F9F] rounded-[10px] text-[20px] 
+          transition-all focus:outline-none focus:border-[#B88E2F] mt-10" />
       </div>
 
       <div className="w-[608px] py-24 mr-8">

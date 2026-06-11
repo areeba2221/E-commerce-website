@@ -51,7 +51,32 @@ const Navbar = () => {
 
         <div className="hidden md:flex items-center gap-5 text-gray-700">
           <button className="hover:text-[#C8A96E] transition-colors duration-200">
-            <UserIcon /></button>
+            <UserIcon />
+    {/* <div className="hidden md:flex items-center gap-5">
+
+      {user ? (
+        // ── Logged in ──
+        <div className="flex items-center gap-3">
+          <span className="text-[14px] font-medium text-black">
+            Hi, {user.name}
+          </span>
+          <button
+            onClick={logout}
+            className="text-[14px] text-[#B88E2F] hover:underline">
+            Logout
+          </button>
+        </div>
+      ) : (
+        // ── Not logged in ──
+        <Link to="/login"
+          className="text-[14px] font-medium text-black hover:text-[#B88E2F]">
+          Login
+        </Link>
+      )}
+
+    </div> */}
+
+            </button>
           <button className="hover:text-[#C8A96E] transition-colors duration-200">
             <SearchIcon /></button>
           <button className="hover:text-[#C8A96E] transition-colors duration-200">
