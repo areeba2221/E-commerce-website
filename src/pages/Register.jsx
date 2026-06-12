@@ -7,7 +7,7 @@ import myLogo from '/src/assets/logo.png';
 import { EyeIcon, EyeOff } from "/src/assets/Svg";
 
 const Register = () => {
-   const { register } = useAuth();
+  const { register } = useAuth();
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
 
@@ -61,32 +61,35 @@ const Register = () => {
   //   if (result.success) navigate("/");
   // };
 
-   const handleSubmit = async (e) => {
-        e.preventDefault();
+  const handleSubmit = async (e) => {
+    e.preventDefault();
 
-        if (!validate()) return;
+    if (!validate()) return;
 
-        try {
-            setLoading(true);
+    try {
+      setLoading(true);
 
-            const { confirmPassword, ...dataToSend } = formData;
-            await registerUser(dataToSend);
+      const { confirmPassword, ...dataToSend } = formData;
+      
+      const res = await registerUser(dataToSend);
 
-            alert("Register Successful");
-            localStorage.setItem("token", res.data.token);
-            setToken(res.data.token);
-            navigate('/');
+      alert("Register Successful");
 
-        } catch (err) {
-            console.log(err);
-            alert(
-                err.response?.data?.message ||
-                err.message
-            );
-        } finally {
-            setLoading(false);
-        }
-    };
+      localStorage.setItem("token", res.token);
+      
+
+      navigate('/');
+
+    } catch (err) {
+      console.log(err);
+      alert(
+        err.response?.data?.message ||
+        err.message
+      );
+    } finally {
+      setLoading(false);
+    }
+  };
 
 
   return (
@@ -161,7 +164,7 @@ const Register = () => {
                   className="absolute right-4 top-3"
                   onClick={() => setShowPassword(!showPassword)}
                 >
-                   {showPassword ? <EyeOff className="w-5 h-5" /> : <EyeIcon className="w-5 h-5" />}
+                  {showPassword ? <EyeOff className="w-5 h-5" /> : <EyeIcon className="w-5 h-5" />}
                 </button>
               </div>
 
@@ -190,7 +193,7 @@ const Register = () => {
                   onClick={() => setShowConfirmPassword(!showConfirmPassword)}
                 >
                   {showConfirmPassword ? <EyeOff className="w-5 h-5" /> : <EyeIcon className="w-5 h-5" />}
-                 
+
                 </button>
               </div>
 

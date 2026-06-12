@@ -18,20 +18,42 @@ const Login = () => {
         setFormData({ ...formData, [e.target.name]: e.target.value });
     };
 
-   const handleSubmit = async (e) => {
-    e.preventDefault();
-    if (!form.email || !form.password) return;
+    const handleSubmit = async (e) => {
+        e.preventDefault();
 
-    setLoading(true);
-    const result = await login(form.email, form.password);
-    setLoading(false);
+        if (!formData.email || !formData.password) {
+            alert("Please fill all fields");
+            return;
+        }
 
-    if (result.success) {
-      result.user.role === "admin"
-        ? navigate("/admin")    
-        : navigate("/");       
-    }
-  };
+        try {
+            setLoading(true);
+
+            const result = await login(
+                formData.email,
+                formData.password
+            );
+
+            if (result.success) {
+                localStorage.setItem("token", result.token);
+
+                if (result.user?.role === "admin") {
+                    navigate("/admin");
+                } else {
+                    navigate("/home");
+                }
+            }
+        } catch (error) {
+            console.log(error);
+            alert(
+                error.response?.data?.message ||
+                error.message ||
+                "Login Failed"
+            );
+        } finally {
+            setLoading(false);
+        }
+    };
 
 
     return (
@@ -59,7 +81,7 @@ const Login = () => {
             <hr className="flex-grow" />
           </div> */}
 
-                    <form className="space-y-5">
+                    <form onSubmit={handleSubmit} className="space-y-5">
                         <div>
                             <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-1">
                                 Email Address
@@ -94,7 +116,7 @@ const Login = () => {
                                     className="absolute right-4 top-3"
                                     onClick={() => setShowPassword(!showPassword)}
                                 >
-                                   {showPassword ? <EyeOff className="w-5 h-5" /> : <EyeIcon className="w-5 h-5" />}
+                                    {showPassword ? <EyeOff className="w-5 h-5" /> : <EyeIcon className="w-5 h-5" />}
                                 </button>
                             </div>
                         </div>

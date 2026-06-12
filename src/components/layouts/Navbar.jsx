@@ -9,7 +9,7 @@ import {
 } from "/src/assets/Svg";
 
 const navLinks = [
-  { label: "Home", path: "/" },
+  { label: "Home", path: "/home" },
   { label: "Shop", path: "/shop" },
   { label: "About", path: "/about" },
   { label: "Contact", path: "/contact" },
