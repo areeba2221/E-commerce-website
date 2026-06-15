@@ -1,6 +1,9 @@
-import { useState } from "react";
-import myLogo from '/src/assets/logo.png';
-import { NavLink } from "react-router-dom";
+import { useState, useEffect, useRef } from "react";
+import myLogo from "/src/assets/logo.png";
+import { NavLink, useNavigate } from "react-router-dom";
+import { changePassword } from "../../api/auth";
+import { useAuth } from "../../context/AuthContext";
+
 import {
   UserIcon,
   SearchIcon,
@@ -16,77 +19,99 @@ const navLinks = [
 ];
 
 const Navbar = () => {
+  const navigate = useNavigate();
+  const { user, setUser } = useAuth();
+
   const [activePage, setActivePage] = useState("Home");
-  const [menuOpen, setMenuOpen] = useState(false);
+  const [dropdownOpen, setDropdownOpen] = useState(false);
+  const dropdownRef = useRef(null);
+
+  useEffect(() => {
+    const handleClickOutside = (e) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(e.target)) {
+        setDropdownOpen(false);
+      }
+    };
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, []);  
+
+  const logout = () => {
+    localStorage.removeItem("token");
+    setUser(null);
+    navigate("/login");
+  };
 
   return (
-    <nav className="w-full bg-white shadow-sm px-8 py-4">
-      <div className="max-w-7xl mx-auto flex items-center justify-between">
-
-        <button onClick={() => setActivePage("Home")}
-          style={{ background: "none", border: "none", cursor: "pointer", padding: 0 }}>
-          <img src={myLogo} alt="Company Logo" />
-        </button>
-
-        <ul className="hidden md:flex items-center gap-10">
-          {navLinks.map(({ label, path }) => (
-            <li key={label}>
-              <NavLink
-                to={path}
-                style={({ isActive }) => ({
-                  fontFamily: "'Poppins', sans-serif",
-                  cursor: "pointer",
-                  color: isActive ? "#C8A96E" : "#000000",
-                  borderBottom: isActive ? "2px solid #C8A96E" : "2px solid transparent",
-                })}
-                className="text-[16px] font-medium transition-colors duration-200 tracking-wide pb-1"
-              >
-                {label}
-              </NavLink>
-            </li>
-          ))}
-        </ul>
-
-
-
-        <div className="hidden md:flex items-center gap-5 text-gray-700">
-          <button className="hover:text-[#C8A96E] transition-colors duration-200">
-            <UserIcon />
-    {/* <div className="hidden md:flex items-center gap-5">
-
-      {user ? (
-        // ── Logged in ──
-        <div className="flex items-center gap-3">
-          <span className="text-[14px] font-medium text-black">
-            Hi, {user.name}
-          </span>
+    <>
+      <nav className="w-full bg-white shadow-sm px-8 py-4">
+        <div className="max-w-7xl mx-auto flex items-center justify-between">
           <button
-            onClick={logout}
-            className="text-[14px] text-[#B88E2F] hover:underline">
-            Logout
+            onClick={() => navigate("/home")}
+            className="cursor-pointer"
+          >
+            <img src={myLogo} alt="Logo" />
           </button>
+
+          <ul className="hidden md:flex items-center gap-10">
+            {navLinks.map(({ label, path }) => (
+              <li key={label}>
+                <NavLink
+                  to={path}
+                  className={({ isActive }) =>
+                    `text-[16px] font-medium pb-1 ${
+                      isActive
+                        ? "text-[#C8A96E] border-b-2 border-[#C8A96E]"
+                        : "text-black"
+                    }`
+                  }
+                >
+                  {label}
+                </NavLink>
+              </li>
+            ))}
+          </ul>
+
+          <div className="hidden md:flex items-center gap-5 text-gray-700">
+            <div ref={dropdownRef} className="relative">
+              <button
+                onClick={() => setDropdownOpen(!dropdownOpen)}
+                className="hover:text-[#C8A96E]"
+              >
+                <UserIcon />
+              </button>
+
+              {dropdownOpen && (
+                <div className="absolute right-0 mt-4 w-44 bg-[#F9F1E7] shadow-lg rounded-xl z-50">
+                  <div className="p-4 border-b">
+                    <p className="font-bold">
+                      {user?.name || "User"}
+                    </p>
+                    <p className="text-sm text-gray-500">
+                      {user?.email || ""}
+                    </p>
+                  </div>
+
+                  
+
+                  <button
+                    onClick={logout}
+                    className="w-full text-left px-4 py-2 text-red-500 font-semibold hover:bg-gray-100"
+                  >
+                    Logout
+                  </button>
+                </div>
+              )}
+            </div>
+
+            <SearchIcon />
+            <HeartIcon />
+            <CartIcon />
+          </div>
         </div>
-      ) : (
-        // ── Not logged in ──
-        <Link to="/login"
-          className="text-[14px] font-medium text-black hover:text-[#B88E2F]">
-          Login
-        </Link>
-      )}
+      </nav>
 
-    </div> */}
-
-            </button>
-          <button className="hover:text-[#C8A96E] transition-colors duration-200">
-            <SearchIcon /></button>
-          <button className="hover:text-[#C8A96E] transition-colors duration-200">
-            <HeartIcon /></button>
-          <button className="hover:text-[#C8A96E] transition-colors duration-200 relative">
-            <CartIcon /></button>
-        </div>
-
-      </div>
-    </nav>
+    </>
   );
 };
 

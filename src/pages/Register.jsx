@@ -39,9 +39,9 @@ const Register = () => {
       return false;
     }
 
-    const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*]).{8,}$/;
+    const passwordRegex = /^(?=.*[a-z])(?=.*[!@#$%^&*]).{8,}$/;
     if (!passwordRegex.test(formData.password)) {
-      alert("Password must be 8+ chars with uppercase, lowercase, number and special character");
+      alert("Password must be 8+ chars with lowercase and special character");
       return false;
     }
 
@@ -53,13 +53,6 @@ const Register = () => {
     return true;
   };
 
-  // const handleSubmit = async () => {
-  //   if (!form.name || !form.email || !form.password) return;
-  //   setLoading(true);
-  //   const result = await register(form.name, form.email, form.password);
-  //   setLoading(false);
-  //   if (result.success) navigate("/");
-  // };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
