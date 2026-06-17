@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { Cross, CircleCross } from "/src/assets/Svg";
 
 export default function CartDrawer() {
-  const { cartItems, isCartOpen, setIsCartOpen, removeFromCart, subtotal } = useCart();
+  const { cartItems, isCartOpen, setIsCartOpen, updateQuantity, removeFromCart, subtotal } = useCart();
 
   return (
     <>
@@ -62,7 +62,7 @@ export default function CartDrawer() {
 
                 <button
                   onClick={() => removeFromCart(
-                    item._id || item.id,   // ← _id pehle try karo
+                    item._id || item.id,  
                     item.size,
                     item.color
                   )}

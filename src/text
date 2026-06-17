@@ -3,3 +3,28 @@ Shop.jsx → ShopProducts  → getProducts() → Backend → MongoDB
 SingleProduct.jsx → ShowProduct → getProduct(id) → Backend → MongoDB
 Cart.jsx → CartSection   → localStorage (no API needed)
 Checkout.jsx → CheckoutSection → localStorage (no API needed)
+
+
+Add to Cart Flow
+User login karta hai aur token receive hota hai
+User product page par “Add to Cart” button click karta hai
+Frontend productId aur quantity backend ko send karta hai (with token)
+Backend auth middleware token verify karke req.user._id set karta hai
+Backend User ko database se find karta hai
+User ke cart array ko check kiya jata hai:
+Agar product already cart mein hai → quantity increase kar di jati hai
+Agar product nahi hai → new item (productId + quantity) cart mein add hota hai
+User document save ho jata hai
+Cart API (GET) call par backend user ka cart return karta hai
+populate("cart.product") se product details bhi attach ho jati hain
+Frontend cart page par data display hota hai (name, price, quantity)
+
+User Login hota hai
+        ↓
+CartContext automatically GET /api/cart call karta hai
+        ↓
+"Add to Cart" click → POST /api/cart { productId, quantity }
+        ↓
+Backend: User model ke andar "cart" array mein product add hota hai
+        ↓
+Cart dobara fetch hoti hai → UI update ho jata hai

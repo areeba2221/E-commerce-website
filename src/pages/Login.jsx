@@ -34,15 +34,22 @@ const Login = () => {
                 formData.password
             );
 
+            // if (result.success) {
+            //     localStorage.setItem("token", result.token);
+            //     console.log("LOGIN RESULT:", result);
+            //     if (result.user?.role === "admin") {
+            //         navigate("/admin");
+            //     } else {
+            //         navigate("/home");
+            //     }
+            // }
             if (result.success) {
-                localStorage.setItem("token", result.token);
-
-                if (result.user?.role === "admin") {
-                    navigate("/admin");
-                } else {
-                    navigate("/home");
-                }
-            }
+    if (result.user?.role === "admin") {
+        navigate("/admin");
+    } else {
+        navigate("/home");
+    }
+}
         } catch (error) {
             console.log(error);
             alert(

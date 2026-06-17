@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import { getProducts } from "/src/api/productAPI";
+import { getProducts, getProduct } from "/src/api/productAPI";
 import { productsSectionData } from "/src/data/Data";
 import { ShareIcon, CompareIcon, ProductHeartIcon } from "/src/assets/Svg";
 
@@ -86,26 +86,70 @@ function ProductCard({ product }) {
 }
 
 const RelatedProduct = () => {
-  const { id } = useParams();   
+  const { id } = useParams();
   const [relatedProducts, setRelatedProducts] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError]     = useState(null);
+  const [loading, setLoading]         = useState(true);
+  const [loadingMore, setLoadingMore] = useState(false); 
+  const [error, setError]             = useState(null);
+  const [page, setPage]               = useState(1);      
+  const [hasMore, setHasMore]         = useState(true);   
+  const [category, setCategory]       = useState(null); 
 
-  useEffect(() => {
-    setLoading(true);
+  const PAGE_SIZE = 4; 
 
-    getProducts(`?limit=4`)
+  const fetchRelated = (cat, pageNum, isLoadMore = false) => {
+    isLoadMore ? setLoadingMore(true) : setLoading(true);
+
+    getProducts(`?category=${cat}&page=${pageNum}&limit=${PAGE_SIZE}`)
       .then(res => {
-        const data = res.data?.data || [];
-        setRelatedProducts(data);    
-        setLoading(false);
+        const data       = res.data?.data || [];
+        const totalPages = res.data?.pagination?.totalPages || 1;
+
+       const filtered = data.filter(p => p._id !== id);
+
+        if (isLoadMore) {
+          setRelatedProducts(prev => [...prev, ...filtered]); 
+        } else {
+          setRelatedProducts(filtered);      
+        }
+
+        setHasMore(pageNum < totalPages);
+        isLoadMore ? setLoadingMore(false) : setLoading(false);
       })
       .catch(err => {
         console.log(err);
         setError("Related products is not load");
+        isLoadMore ? setLoadingMore(false) : setLoading(false);
+      });
+  };
+
+  useEffect(() => {
+    if (!id) return;
+    setLoading(true);
+
+    getProduct(id)
+      .then(res => {
+        const cat = res.data?.data?.category;
+        if (!cat) {
+          setLoading(false);
+          return;
+        }
+        setCategory(cat);
+        fetchRelated(cat, 1);
+      })
+      .catch(err => {
+        console.log(err);
+        setError("Product category is not load");
         setLoading(false);
       });
   }, [id]);
+
+  const handleShowMore = () => {
+    if (!category) return;
+    const nextPage = page + 1;
+    setPage(nextPage);
+    fetchRelated(category, nextPage, true);
+  };
 
   if (loading) return <p className="text-center py-16">Loading...</p>;
   if (error)   return <p className="text-center py-16 text-red-500">{error}</p>;
@@ -125,11 +169,21 @@ const RelatedProduct = () => {
       </div>
 
       <div className="flex justify-center mt-12">
-        <button className="border w-61.25 h-12 border-[#B88E2F] mb-25 text-[#B88E2F] font-semibold 
-          px-16 py-3 text-[16px] leading-[150%] tracking-widest 
-          hover:bg-[#B88E2F] hover:text-white transition-colors duration-200">
-          {productsSectionData.buttonText}
-        </button>
+        {hasMore ? (
+          <button
+            onClick={handleShowMore}
+            disabled={loadingMore}
+            className="border w-61.25 h-12 border-[#B88E2F] mb-25 text-[#B88E2F] font-semibold 
+              px-16 py-3 text-[16px] leading-[150%] tracking-widest 
+              hover:bg-[#B88E2F] hover:text-white transition-colors duration-200
+              disabled:opacity-50 disabled:cursor-not-allowed">
+            {loadingMore ? "Loading..." : productsSectionData.buttonText}
+          </button>
+        ) : (
+          relatedProducts.length > PAGE_SIZE && (
+            <p className="text-[#9F9F9F] text-[16px] mb-25">All products loaded</p>
+          )
+        )}
       </div>
 
     </div>

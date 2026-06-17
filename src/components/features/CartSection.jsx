@@ -9,7 +9,7 @@ export default function CartSection() {
     const qty = Math.max(1, parseInt(value) || 1);
     setCartItems(prev =>
       prev.map(item =>
-        (item._id === id || item.id === id)  // ← dono support
+        (item._id === id || item.id === id)  
         && item.size  === size
         && item.color === color
           ? { ...item, quantity: qty }
@@ -92,7 +92,7 @@ export default function CartSection() {
                           min="1"
                           value={item.quantity}
                           onChange={(e) =>
-                            updateQuantity(itemId, item.size, item.color, e.target.value)
+                            updateQuantity(item._id, item.size, item.color, e.target.value)
                           }
                           className="w-15 h-15 border border-[#9F9F9F] rounded-[10px]
                             text-center text-[16px] font-medium focus:outline-none
@@ -105,7 +105,7 @@ export default function CartSection() {
                       </span>
 
                       <button
-                        onClick={() => removeFromCart(itemId, item.size, item.color)}
+                        onClick={() => removeFromCart(item._id, item.size, item.color)}
                         className="hover:scale-110 transition-transform">
                         <TrashIcon />
                       </button>

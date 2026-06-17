@@ -7,7 +7,7 @@ import { StarIcon, RightArrow, Facebook, Linkedin, Twitter } from "/src/assets/S
 export default function ProductDetails() {
   const { id } = useParams();
   const { addToCart } = useCart();
-
+  
   const [product, setProduct]       = useState(null);
   const [loading, setLoading]       = useState(true);
   const [error, setError]           = useState(null);
