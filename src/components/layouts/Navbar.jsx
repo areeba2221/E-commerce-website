@@ -3,13 +3,8 @@ import myLogo from "/src/assets/logo.png";
 import { NavLink, useNavigate } from "react-router-dom";
 import { changePassword } from "../../api/auth";
 import { useAuth } from "../../context/AuthContext";
-
-import {
-  UserIcon,
-  SearchIcon,
-  HeartIcon,
-  CartIcon,
-} from "/src/assets/Svg";
+import { UserIcon, SearchIcon, HeartIcon, CartIcon, } from "/src/assets/Svg";
+import { useCart } from "../../context/CartContext";
 
 const navLinks = [
   { label: "Home", path: "/home" },
@@ -21,10 +16,12 @@ const navLinks = [
 const Navbar = () => {
   const navigate = useNavigate();
   const { user, setUser } = useAuth();
-
+  const { cartItems, setIsCartOpen } = useCart();
   const [activePage, setActivePage] = useState("Home");
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const dropdownRef = useRef(null);
+
+  const cartCount = cartItems.reduce((sum, item) => sum + item.quantity, 0); 
 
   useEffect(() => {
     const handleClickOutside = (e) => {
@@ -82,7 +79,7 @@ const Navbar = () => {
               </button>
 
               {dropdownOpen && (
-                <div className="absolute right-0 mt-4 w-44 bg-[#F9F1E7] shadow-lg rounded-xl z-50">
+                <div className="absolute right-0 mt-4 w-60 bg-[#F9F1E7] shadow-lg rounded-xl z-40">
                   <div className="p-4 border-b">
                     <p className="font-bold">
                       {user?.name || "User"}
@@ -103,10 +100,27 @@ const Navbar = () => {
                 </div>
               )}
             </div>
-
-            <SearchIcon />
-            <HeartIcon />
-            <CartIcon />
+            <button className="hover:text-[#C8A96E]">
+                <SearchIcon />
+            </button>
+            <button className="hover:text-[#C8A96E]">
+              <HeartIcon />
+            </button>
+            
+            <button
+            onClick={() => setIsCartOpen(true)}
+            className="hover:text-[#C8A96E] transition-colors duration-200 relative"
+            >
+              <CartIcon />
+              {cartCount > 0 && (
+              <span className="absolute -top-2 -right-2 bg-[#B88E2F] text-white 
+                text-[11px] font-semibold w-5 h-5 rounded-full flex items-center 
+                justify-center">
+                {cartCount}
+              </span>
+            )}
+            </button>
+            
           </div>
         </div>
       </nav>
