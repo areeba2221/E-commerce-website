@@ -12,6 +12,7 @@ import { AuthProvider } from "./context/AuthContext";
 import { CartProvider } from "/src/context/CartContext";
 import CartDrawer from "./components/features/CartDrawer";
 import Checkout from "./pages/Checkout";
+import OrderSuccess from "./pages/OrderSuccess";
 
 
 function App() {
@@ -36,6 +37,8 @@ function App() {
             <Route path="/product/:id" element={<SingleProduct />} />
             <Route path="/cart" element={<Cart />} />
             <Route path="/checkout" element={<Checkout />} />
+            <Route path="/order-success" element={<OrderSuccess />} />
+            {/* <Route path="/order-success/:orderId" element={<OrderSuccess />} /> */}
           </Routes>
         </BrowserRouter>
       </CartProvider>

@@ -53,7 +53,7 @@ export default function ProductDetails() {
     <>
       <nav className="w-full flex items-center gap-3 text-[16px] text-[#9F9F9F] 
         bg-[#F9F1E7] px-6 py-6 rounded mb-10">
-        <Link to="/" className="hover:text-black transition-colors ml-9">Home</Link>
+        <Link to="/home" className="hover:text-black transition-colors ml-9">Home</Link>
         <RightArrow />
         <Link to="/shop" className="hover:text-black transition-colors">Shop</Link>
         <RightArrow />
@@ -157,12 +157,12 @@ export default function ProductDetails() {
             <div className="flex flex-wrap items-center gap-4 pb-12 border-b 
               border-[#D9D9D9] mb-8">
 
-              <div className="flex items-center justify-between border border-[#9F9F9F] 
+              <div className="flex items-center justify-between border border-[#B88E2F]
                 rounded-[10px] w-30.75 h-16 px-4">
                 <button
                   onClick={() => setQuantity(prev => Math.max(1, prev - 1))}
                   className="text-[16px] font-medium hover:text-[#B88E2F]">-</button>
-                <span className="font-medium text-black">{quantity}</span>
+                <span className="font-medium text-[#B88E2F]">{quantity}</span>
                 <button
                   onClick={() => setQuantity(prev => prev + 1)}
                   className="text-[16px] font-medium hover:text-[#B88E2F]">+</button>
@@ -170,13 +170,13 @@ export default function ProductDetails() {
 
               <button
                 onClick={() => addToCart(product, quantity, selectedSize, selectedColor)}
-                className="w-53.75 h-16 px-12 border border-black rounded-[15px] 
-                  text-[20px] hover:bg-black hover:text-white transition-all">
+                className="w-53.75 h-16 px-12 border border-[#B88E2F] rounded-[15px] 
+                  text-[20px] hover:bg-[#B88E2F] hover:text-white transition-all">
                 Add To Cart
               </button>
 
-              <button className="w-53.75 h-16 px-12 border border-black rounded-[15px] 
-                text-[20px] hover:bg-black hover:text-white transition-all">
+              <button className="w-53.75 h-16 px-12 border border-[#B88E2F] rounded-[15px] 
+                text-[20px] hover:bg-[#B88E2F] hover:text-white transition-all">
                 + Compare
               </button>
             </div>
@@ -197,11 +197,17 @@ export default function ProductDetails() {
               <div className="flex items-center">
                 <span className="w-24">Share</span>
                 <span>:</span>
-                <span className="flex items-center ml-2 gap-3 text-black text-lg">
-                  <Facebook />
+                <Link className="flex items-center ml-2 gap-3">
+                  <Facebook /> </Link>
+                  <Link className="flex items-center ml-2 gap-3">
                   <Linkedin />
-                  <Twitter />
-                </span>
+                  </Link>
+                  
+                  <Link className="flex items-center ml-2 gap-3">
+                   <Twitter />
+                  </Link>
+                 
+                
               </div>
             </div>
 

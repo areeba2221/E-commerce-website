@@ -66,7 +66,7 @@ export default function CartDrawer() {
                     item.size,
                     item.color
                   )}
-                  className="w-6 h-6 rounded-full bg-[#9F9F9F] flex items-center justify-center hover:bg-black transition-colors shrink-0">
+                  className="w-6 h-6 rounded-full bg-[#9c6e01] flex items-center justify-center hover:bg-[#d8ad4a] transition-colors shrink-0">
                   <CircleCross />
                 </button>
 
@@ -85,15 +85,15 @@ export default function CartDrawer() {
             </div>
             <div className="flex gap-3">
               <Link to="/cart" onClick={() => setIsCartOpen(false)}
-                className="flex-1 text-center border border-black rounded-full py-2 text-[13px] hover:bg-black hover:text-white transition-all">
+                className="flex-1 text-center border border-[#B88E2F] rounded-full py-2 text-[13px] hover:bg-[#B88E2F] hover:text-white transition-all">
                 Cart
               </Link>
               <Link to="/checkout" onClick={() => setIsCartOpen(false)}
-                className="flex-1 text-center border border-black rounded-full py-2 text-[13px] hover:bg-black hover:text-white transition-all">
+                className="flex-1 text-center border border-[#B88E2F] rounded-full py-2 text-[13px] hover:bg-[#B88E2F] hover:text-white transition-all">
                 Checkout
               </Link>
               <Link to="/comparison" onClick={() => setIsCartOpen(false)}
-                className="flex-1 text-center border border-black rounded-full py-2 text-[13px] hover:bg-black hover:text-white transition-all">
+                className="flex-1 text-center border border-[#B88E2F] rounded-full py-2 text-[13px] hover:bg-[#B88E2F] hover:text-white transition-all">
                 Comparison
               </Link>
             </div>

@@ -136,8 +136,8 @@ export default function CartSection() {
               </div>
 
               <Link to="/checkout"
-                className="block w-full text-center border border-black rounded-[15px]
-                  py-4 text-[20px] hover:bg-black hover:text-white transition-all">
+                className="block w-full text-center border border-[#B88E2F] rounded-[15px]
+                  py-4 text-[20px] hover:bg-[#B88E2F] hover:text-white transition-all">
                 Check Out
               </Link>
             </div>

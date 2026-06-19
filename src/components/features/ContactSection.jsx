@@ -1,11 +1,28 @@
-import React from "react";
-import {
-  MapPin,
-  Phone,
-  Clock,
-} from "lucide-react";
+import React , { useRef } from "react";
+import emailjs from '@emailjs/browser';
+import { MapPin, Phone, Clock } from "lucide-react";
 
 const ContactSection = () => {
+
+  const form = useRef();
+
+  const sendEmail = (e) => {
+    e.preventDefault();
+
+    emailjs
+      .sendForm('YOUR_SERVICE_ID', 'YOUR_TEMPLATE_ID', form.current, {
+        publicKey: 'YOUR_PUBLIC_KEY',
+      })
+      .then(
+        () => {
+          console.log('SUCCESS!');
+        },
+        (error) => {
+          console.log('FAILED...', error.text);
+        },
+      );
+  };
+
   return (
     <div className="bg-white min-h-screen py-24 px-6">
       <div className="text-center max-w-[644px] mx-auto">
@@ -75,7 +92,9 @@ const ContactSection = () => {
           </div>
         </div>
 
-        <form className="space-y-8">
+        <form
+        ref={form} onSubmit={sendEmail}
+        className="space-y-8">
 
           <div>
             <label className="block mb-3 font-medium">
@@ -84,6 +103,7 @@ const ContactSection = () => {
 
             <input
               type="text"
+              name="user_name"
               placeholder="Abc"
               className="w-full border border-gray-300 rounded-xl px-5 py-4 focus:outline-none focus:ring-2 focus:ring-[#B88E2F]"
             />
@@ -96,6 +116,7 @@ const ContactSection = () => {
 
             <input
               type="email"
+              name="user_email"
               placeholder="Abc@def.com"
               className="w-full border border-gray-300 rounded-xl px-5 py-4 focus:outline-none focus:ring-2 focus:ring-[#B88E2F]"
             />
@@ -108,6 +129,7 @@ const ContactSection = () => {
 
             <input
               type="text"
+              name="subject"
               placeholder="This is optional"
               className="w-full border border-gray-300 rounded-xl px-5 py-4 focus:outline-none focus:ring-2 focus:ring-[#B88E2F]"
             />
@@ -120,6 +142,7 @@ const ContactSection = () => {
 
             <textarea
               rows="5"
+              name="message"
               placeholder="Hi! I'd like to ask about"
               className="w-full border border-gray-300 rounded-xl px-5 py-4 focus:outline-none focus:ring-2 focus:ring-[#B88E2F]"
             ></textarea>
@@ -127,6 +150,7 @@ const ContactSection = () => {
 
           <button
             type="submit"
+            value="Send"
             className="bg-[#B88E2F] hover:bg-[#9c7724] text-white px-12 py-4 rounded-lg transition"
           >
             Submit
