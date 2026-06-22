@@ -1,33 +1,39 @@
-import React, { useRef } from "react";
-import emailjs from "@emailjs/browser";
+import React, { useState } from "react";
+import API from "/src/api/axios";
 import { toast, ToastContainer } from 'react-toastify';
 import { MapPin, Phone, Clock } from "lucide-react";
 
 const ContactSection = () => {
-  const form = useRef();
+  const [loading, setLoading] = useState(false);
+  const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+    phone: "",
+    subject: "",
+    message: "", 
+  }) 
 
-  const sendEmail = (e) => {
-    e.preventDefault();
-
-    emailjs
-      .sendForm(
-        import.meta.env.VITE_EMAILJS_SERVICE_ID,
-        import.meta.env.VITE_EMAILJS_TEMPLATE_ID,
-        form.current,
-        import.meta.env.VITE_EMAILJS_PUBLIC_KEY
-      )
-      .then(
-        (result) => {
-          console.log("SUCCESS!", result.text);
-          toast.success("Message sent successfully!");
-          form.current.reset();
-        },
-        (error) => {
-          console.log("FAILED...", error.text);
-          toast.error("Failed to send message.");
-        }
-      );
+  const handleChange = (e) => {
+    setFormData({
+      ...formData, [e.target.name]: e.target.value,
+    });
   };
+
+  const sendEmail = async (e) => {
+  e.preventDefault();
+
+  try {
+    setLoading(true);
+
+    const { data } = await API.post("/contact", formData);
+
+    toast.success(data.message);
+  } catch (error) {
+    toast.error(error.response?.data?.message || "Error");
+  } finally {
+    setLoading(false);
+  }
+};
 
   return (
     <>
@@ -40,7 +46,7 @@ const ContactSection = () => {
             />
     
     <div className="bg-white min-h-screen py-24 px-6">
-      <div className="text-center max-w-[644px] mx-auto">
+      <div className="text-center max-w-161 mx-auto">
         <h1 className="text-4xl font-semibold mb-4">
           Get In Touch With Us
         </h1>
@@ -90,7 +96,6 @@ const ContactSection = () => {
 
         {/* Form */}
         <form
-          ref={form}
           onSubmit={sendEmail}
           className="space-y-6"
         >
@@ -102,6 +107,8 @@ const ContactSection = () => {
             <input
               type="text"
               name="name"
+              value={formData.name}
+              onChange={handleChange}
               placeholder="Abc"
               required
               className="w-full border border-gray-300 rounded-xl px-5 py-4 focus:outline-none focus:ring-2 focus:ring-[#B88E2F]"
@@ -116,7 +123,25 @@ const ContactSection = () => {
             <input
               type="email"
               name="email"
+              value={formData.email}
+              onChange={handleChange}
               placeholder="abc@def.com"
+              required
+              className="w-full border border-gray-300 rounded-xl px-5 py-4 focus:outline-none focus:ring-2 focus:ring-[#B88E2F]"
+            />
+          </div>
+
+          <div>
+            <label className="block mb-2 font-medium">
+              Phone Number
+            </label>
+
+            <input
+              type="Number"
+              name="phone"
+              value={formData.phone}
+              onChange={handleChange}
+              placeholder="+92 ____________"
               required
               className="w-full border border-gray-300 rounded-xl px-5 py-4 focus:outline-none focus:ring-2 focus:ring-[#B88E2F]"
             />
@@ -129,11 +154,13 @@ const ContactSection = () => {
 
             <input
               type="text"
-              name="title"
+              value={formData.subject}
+              onChange={handleChange}
               placeholder="This is optional"
               className="w-full border border-gray-300 rounded-xl px-5 py-4 focus:outline-none focus:ring-2 focus:ring-[#B88E2F]"
             />
           </div>
+          
 
           <div>
             <label className="block mb-2 font-medium">
@@ -143,6 +170,8 @@ const ContactSection = () => {
             <textarea
               rows="5"
               name="message"
+              value={formData.message}
+              onChange={handleChange}
               placeholder="Hi! I'd like to ask about..."
               required
               className="w-full border border-gray-300 rounded-xl px-5 py-4 focus:outline-none focus:ring-2 focus:ring-[#B88E2F]"
