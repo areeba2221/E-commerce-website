@@ -162,7 +162,7 @@ export default function ProductDetails() {
                 <button
                   onClick={() => setQuantity(prev => Math.max(1, prev - 1))}
                   className="text-[16px] font-medium hover:text-[#B88E2F]">-</button>
-                <span className="font-medium text-[#B88E2F]">{quantity}</span>
+                <span className="font-medium text-black">{quantity}</span>
                 <button
                   onClick={() => setQuantity(prev => prev + 1)}
                   className="text-[16px] font-medium hover:text-[#B88E2F]">+</button>

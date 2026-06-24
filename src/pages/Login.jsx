@@ -34,15 +34,6 @@ const Login = () => {
                 formData.password
             );
 
-            // if (result.success) {
-            //     localStorage.setItem("token", result.token);
-            //     console.log("LOGIN RESULT:", result);
-            //     if (result.user?.role === "admin") {
-            //         navigate("/admin");
-            //     } else {
-            //         navigate("/home");
-            //     }
-            // }
             if (result.success) {
     if (result.user?.role === "admin") {
         navigate("/admin");
@@ -128,15 +119,15 @@ const Login = () => {
                             </div>
                         </div>
 
-                        <div className="flex justify-between text-sm">
-                            <label className="flex items-center gap-2">
+                        <div className="flex justify-end text-sm">
+                            {/* <label className="flex items-center gap-2">
                                 <input type="checkbox" />
                                 Remember Me
-                            </label>
+                            </label> */}
 
-                            <a href="/" className="text-[#B88E2F] hover:underline">
+                            <Link to="/forgot-password"  className="text-[#B88E2F] hover:underline">
                                 Forgot Password?
-                            </a>
+                            </Link>
                         </div>
 
                         <button

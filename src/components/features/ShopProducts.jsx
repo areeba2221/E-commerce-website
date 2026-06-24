@@ -1,11 +1,13 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { getProducts } from "/src/api/productAPI";
+import { useCart } from "/src/context/CartContext";
 import { ShareIcon, CompareIcon, ProductHeartIcon } from "/src/assets/Svg";
 
 function ProductCard({ product }) {
   const [isHovered, setIsHovered] = useState(false);
   const navigate = useNavigate();
+  const { addToCart } = useCart();
 
   const handleAction = (e, callback) => {
     e.stopPropagation();
@@ -38,7 +40,17 @@ function ProductCard({ product }) {
           ${isHovered ? "opacity-100" : "opacity-0"}`}
         >
           <button
-            onClick={(e) => handleAction(e, () => console.log("Added to cart:", product._id))}
+            onClick={(e) => {
+              e.stopPropagation();
+
+              addToCart({
+                _id: product._id,
+                name: product.name,
+                price: product.price,
+                image: product.images?.[0]?.url,
+                quantity: 1,
+              });
+            }}
             className="bg-white text-[#B88E2F] font-semibold text-[16px] px-14 py-3 
               shadow-md hover:bg-[#B88E2F] hover:text-white transition-colors duration-200">
             Add to cart

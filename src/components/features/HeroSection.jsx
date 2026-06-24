@@ -30,9 +30,11 @@ const Hero = () => {
         </p>
 
         
-        <button className="bg-[#B88E2F] hover:bg-[#a87b20] text-white font-bold px-10 py-4 transition duration-300">
+        <a 
+        href='/shop'
+        className="bg-[#B88E2F] hover:bg-[#a87b20] text-white font-bold px-10 py-4 transition duration-300">
           BUY NOW
-        </button>
+        </a>
       </div>
 
     </section>

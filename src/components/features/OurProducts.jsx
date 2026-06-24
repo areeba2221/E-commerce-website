@@ -1,12 +1,14 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { getProducts } from "/src/api/productAPI";
+import { useCart } from "/src/context/CartContext";
 import { productsSectionData } from "/src/data/Data";
 import { ShareIcon, CompareIcon, ProductHeartIcon } from "/src/assets/Svg";
 
 function ProductCard({ product }) {
   const [isHovered, setIsHovered] = useState(false);
   const navigate = useNavigate();
+  const { addToCart } = useCart();
 
   return (
     <div
@@ -44,8 +46,16 @@ function ProductCard({ product }) {
           <button
             onClick={(e) => {
               e.stopPropagation();
-              console.log("Add to cart:", product._id);
+
+              addToCart({
+                _id: product._id,
+                name: product.name,
+                price: product.price,
+                image: product.images?.[0]?.url,
+                quantity: 1,
+              });
             }}
+
             className="bg-white text-[#B88E2F] font-semibold text-[16px] px-10 py-3
               hover:bg-[#B88E2F] hover:text-white transition-colors duration-200">
             Add to cart
@@ -83,29 +93,29 @@ function ProductCard({ product }) {
 }
 
 export default function OurProducts() {
-  const [products, setProducts]   = useState([]);
-  const [loading, setLoading]     = useState(true);
-  const [loadingMore, setLoadingMore] = useState(false);  
-  const [error, setError]         = useState(null);
-  const [page, setPage]           = useState(1);          
-  const [hasMore, setHasMore]     = useState(true);       
-  const LIMIT = 8;                                        
+  const [products, setProducts] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [loadingMore, setLoadingMore] = useState(false);
+  const [error, setError] = useState(null);
+  const [page, setPage] = useState(1);
+  const [hasMore, setHasMore] = useState(true);
+  const LIMIT = 8;
 
   const fetchProducts = (pageNum, isLoadMore = false) => {
     isLoadMore ? setLoadingMore(true) : setLoading(true);
 
     getProducts(`?page=${pageNum}&limit=${LIMIT}`)
       .then(res => {
-        const data       = res.data?.data || [];
+        const data = res.data?.data || [];
         const totalPages = res.data?.pagination?.totalPages || 1;
 
         if (isLoadMore) {
-          setProducts(prev => [...prev, ...data]);  
+          setProducts(prev => [...prev, ...data]);
         } else {
-          setProducts(data);                       
+          setProducts(data);
         }
 
-        setHasMore(pageNum < totalPages);           
+        setHasMore(pageNum < totalPages);
         isLoadMore ? setLoadingMore(false) : setLoading(false);
       })
       .catch(err => {
@@ -122,11 +132,11 @@ export default function OurProducts() {
   const handleShowMore = () => {
     const nextPage = page + 1;
     setPage(nextPage);
-    fetchProducts(nextPage, true);  
+    fetchProducts(nextPage, true);
   };
 
   if (loading) return <p className="text-center py-16">Loading...</p>;
-  if (error)   return <p className="text-center py-16 text-red-500">{error}</p>;
+  if (error) return <p className="text-center py-16 text-red-500">{error}</p>;
 
   return (
     <section className="py-16 px-6 max-w-6xl mx-auto">

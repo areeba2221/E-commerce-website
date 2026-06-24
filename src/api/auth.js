@@ -7,4 +7,6 @@ export const logoutUser = () => API.post('/auth/logout');
 export const getProfile   = ()     => API.get('/auth/me');
 export const updateProfile = (data) => API.put('/auth/updateMe', data);
 export const changePassword = (data) => API.post('/auth/changePassword', data);
-
+export const sendOtp = (data) => API.post('/auth/send-otp', data);
+export const verifyOtp = (data) => API.post('/auth/verify-otp', data);
+export const resetPassword = (data) => API.post('/auth/reset-password', data);

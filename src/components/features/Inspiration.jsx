@@ -33,10 +33,11 @@ export default function Inspirations() {
           <p className="text-[#616161] text-[16px] leading-[150%] mb-8 max-w-[368px]">
           {inspirationContent.description}
           </p>
-          <button className="bg-[#B88E2F] hover:bg-[#9a7526] transition-colors text-white 
+          <a href="/shop" 
+          className="bg-[#B88E2F] hover:bg-[#9a7526] transition-colors text-white 
           text-sm font-semibold px-10 py-4 tracking-wide w-[176px]">
             {inspirationContent.buttonText}
-          </button>
+          </a>
         </div>
 
         <div className="flex-1 flex items-stretch gap-0 relative overflow-hidden" style={{ height: "580px" }}>
