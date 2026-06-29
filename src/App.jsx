@@ -25,10 +25,12 @@ function App() {
     <>
 
     <ToastContainer
-        position="top-right"
-        autoClose={3000}
-        theme="colored"
-      />
+                    position="top-right"
+                    autoClose={3000}
+                    closeOnClick
+                    pauseOnHover
+                    theme="dark"
+                />
     
     <AuthProvider>
       <CartProvider>

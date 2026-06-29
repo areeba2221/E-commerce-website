@@ -283,15 +283,25 @@ const CheckoutSection = () => {
           </h1>
         </div>
 
-        
+        <div className="flex items-center mt-6">
+          <input type="radio" name="payment" value="direct_bank_transfer"
+            checked={paymentMethod === "direct_bank_transfer"}
+            onChange={(e) => setPaymentMethod(e.target.value)}
+            className="accent-[#B88E2F]" />
+          <h1 className="text-[16px] font-medium text-black ml-4">Direct Bank Transfer</h1>
+        </div>
 
-        {/* <div className="flex items-center mt-6">
+        <p className="w-[529px] text-[16px] font-medium leading-relaxed text-[#9F9F9F] mt-2">
+          Make your payment directly into our bank account. Please use your Order ID as the payment 
+            reference. Your order will not be shipped until the funds have cleared in our account.</p>
+
+        <div className="flex items-center mt-6">
           <input type="radio" name="payment" value="bank_transfer"
             checked={paymentMethod === "bank_transfer"}
             onChange={(e) => setPaymentMethod(e.target.value)}
-            className="accent-black" />
+            className="accent-[#B88E2F]" />
           <h1 className="text-[16px] font-medium text-[#9F9F9F] ml-4">Bank Transfer</h1>
-        </div> */}
+        </div>
 
         <div className="flex items-center mt-3">
           <input type="radio" name="payment" value="cod"
