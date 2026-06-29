@@ -26,7 +26,7 @@ const ShopServices = () => {
      
 <div className='pt-20'>
     <div className="w-full h-68 bg-[#FAF3EA]  py-22 px-10">
-      <div className="max-w-7xl mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6  justify-center items-center">
+      <div className="max-w-7xl mx-auto grid grid-cols-2 lg:grid-cols-4 gap-6 justify-center items-center">
         
         <FeatureCard
           title="High Quality"

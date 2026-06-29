@@ -1,22 +1,23 @@
 import { Link } from "react-router-dom";
 import { useCart } from "/src/context/CartContext";
 import { TrashIcon } from "/src/assets/Svg";
+import Swal from "sweetalert2";
 
 export default function CartSection() {
-  const { cartItems, removeFromCart, subtotal, setCartItems } = useCart();
+  const { cartItems, removeFromCart, subtotal, updateQuantity } = useCart();
 
-  const updateQuantity = (id, size, color, value) => {
-    const qty = Math.max(1, parseInt(value) || 1);
-    setCartItems(prev =>
-      prev.map(item =>
-        (item._id === id || item.id === id)  
-        && item.size  === size
-        && item.color === color
-          ? { ...item, quantity: qty }
-          : item
-      )
-    );
-  };
+  // const updateQuantity = (id, size, color, value) => {
+  //   const qty = Math.max(1, parseInt(value) || 1);
+  //   setCartItems(prev =>
+  //     prev.map(item =>
+  //       (item._id === id || item.id === id)  
+  //       && item.size  === size
+  //       && item.color === color
+  //         ? { ...item, quantity: qty }
+  //         : item
+  //     )
+  //   );
+  // };
 
   return (
     <div className="py-18 bg-white font-Poppins">
@@ -47,9 +48,9 @@ export default function CartSection() {
 
               <div className="flex flex-col gap-4">
                 {cartItems.map((item, i) => {
-                  const price     = Number(item.price) || 0; 
+                  const price = Number(item.price) || 0;
                   const lineTotal = price * item.quantity;
-                  const itemId    = item._id || item.id;       
+                  const itemId = item._id || item.id;
 
                   return (
                     <div
@@ -63,8 +64,8 @@ export default function CartSection() {
                           flex items-center justify-center p-3 shrink-0">
                           <img
                             src={
-                              item.images?.[0]?.url ||  
-                              item.image            || 
+                              item.images?.[0]?.url ||
+                              item.image ||
                               "/placeholder.png"
                             }
                             alt={item.name}
@@ -91,9 +92,10 @@ export default function CartSection() {
                           type="number"
                           min="1"
                           value={item.quantity}
-                          onChange={(e) =>
-                            updateQuantity(item._id, item.size, item.color, e.target.value)
-                          }
+                          onChange={(e) => {
+                            const qty = Math.max(1, parseInt(e.target.value) || 1);
+                            updateQuantity(itemId, qty);
+                          }}
                           className="w-15 h-15 border border-[#9F9F9F] rounded-[10px]
                             text-center text-[16px] font-medium focus:outline-none
                             focus:border-[#B88E2F] transition-colors"
@@ -105,7 +107,22 @@ export default function CartSection() {
                       </span>
 
                       <button
-                        onClick={() => removeFromCart(item._id, item.size, item.color)}
+                        onClick={() => {
+                            Swal.fire({
+                              title: "Remove item?",
+                              text: "Are you sure you want to remove this item from your cart?",
+                              icon: "warning",
+                              showCancelButton: true,
+                              confirmButtonColor: "#B88E2F",
+                              cancelButtonColor: "#9F9F9F",
+                              confirmButtonText: "Yes, remove it",
+                              cancelButtonText: "Cancel",
+                            }).then((result) => {
+                              if (result.isConfirmed) {
+                                removeFromCart(itemId);
+                              }
+                            });
+                          }}
                         className="hover:scale-110 transition-transform">
                         <TrashIcon />
                       </button>

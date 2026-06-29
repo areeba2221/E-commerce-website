@@ -60,7 +60,7 @@ const ResetPassword = () => {
           value={password}
           onChange={(e) => setPassword(e.target.value)}
           className="w-full px-4 py-3 border border-gray-300 rounded-full
-                            focus:outline-none focus:ring-2 focus:ring-[#B88E2F] mb-4 z-[999]"
+                            focus:outline-none focus:ring-2 focus:ring-[#B88E2F] mb-4 z-999"
         />
 
         <button

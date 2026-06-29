@@ -29,13 +29,13 @@ const ForgotPassword = () => {
 
   return (
     <>
-    <ToastContainer
+    {/* <ToastContainer
                 position="top-right"
                 autoClose={3000}
                 closeOnClick
                 pauseOnHover
                 theme="dark"
-            />
+            /> */}
     <div className="min-h-screen bg-[#B88E2F] flex items-center justify-center">
         <img
         src={BG}

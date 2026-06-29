@@ -16,12 +16,20 @@ import { CartProvider } from "/src/context/CartContext";
 import CartDrawer from "./components/features/CartDrawer";
 import Checkout from "./pages/Checkout";
 import OrderSuccess from "./pages/OrderSuccess";
-
+import { ToastContainer } from "react-toastify";
 
 function App() {
 
   return (
 
+    <>
+
+    <ToastContainer
+        position="top-right"
+        autoClose={3000}
+        theme="colored"
+      />
+    
     <AuthProvider>
       <CartProvider>
         <BrowserRouter>
@@ -48,6 +56,9 @@ function App() {
         </BrowserRouter>
       </CartProvider>
     </AuthProvider>
+    </>
+
+    
   );
 }
 
