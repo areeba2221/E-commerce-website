@@ -97,7 +97,6 @@ const ContactSection = () => {
 
         </div>
 
-        {/* Form */}
         <form
           onSubmit={sendEmail}
           className="space-y-6"
@@ -140,7 +139,7 @@ const ContactSection = () => {
             </label>
 
             <input
-              type="Number"
+              type="text"
               name="phone"
               value={formData.phone}
               onChange={handleChange}
