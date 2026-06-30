@@ -6,15 +6,15 @@ import ShopServices from "../components/features/ShopServices";
 import Footer from "../components/layouts/Footer";
 
 const About = () => {
-    return (
-        <>
-        <Navbar/>
-        <AboutHero/>
-        <AboutSection/>
-        <ShopServices/>
-            <Footer />
-        </>
-    );
-}
- 
+  return (
+    <>
+      <Navbar />
+      <AboutHero />
+      <AboutSection />
+      <ShopServices />
+      <Footer />
+    </>
+  );
+};
+
 export default About;

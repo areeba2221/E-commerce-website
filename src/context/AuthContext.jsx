@@ -1,4 +1,3 @@
-
 import { createContext, useContext, useState, useEffect } from "react";
 import { loginUser, registerUser, getProfile } from "../api/auth";
 import Swal from "sweetalert2";
@@ -7,39 +6,37 @@ const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(
-    JSON.parse(localStorage.getItem("user")) || null
+    JSON.parse(localStorage.getItem("user")) || null,
   );
 
-  const [token, setToken] = useState(
-    localStorage.getItem("token") || null
-  );
+  const [token, setToken] = useState(localStorage.getItem("token") || null);
 
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-  const fetchProfile = async () => {
-    const savedToken = localStorage.getItem("token");
+    const fetchProfile = async () => {
+      const savedToken = localStorage.getItem("token");
 
-    if (!savedToken) {
-      setLoading(false);
-      return;
-    }
+      if (!savedToken) {
+        setLoading(false);
+        return;
+      }
 
-    try {
-      const res = await getProfile();
-      setUser(res.data.data);
-    } catch (error) {
-      localStorage.removeItem("token");
-      localStorage.removeItem("user");
-      setUser(null);
-      setToken(null);
-    } finally {
-      setLoading(false);
-    }
-  };
+      try {
+        const res = await getProfile();
+        setUser(res.data.data);
+      } catch (error) {
+        localStorage.removeItem("token");
+        localStorage.removeItem("user");
+        setUser(null);
+        setToken(null);
+      } finally {
+        setLoading(false);
+      }
+    };
 
-  fetchProfile();
-}, []);
+    fetchProfile();
+  }, []);
 
   const login = async (email, password) => {
     try {
@@ -114,9 +111,7 @@ export const AuthProvider = ({ children }) => {
       Swal.fire({
         icon: "error",
         title: "Register Failed",
-        text:
-          err.response?.data?.message ||
-          "Please try again",
+        text: err.response?.data?.message || "Please try again",
         confirmButtonColor: "#B88E2F",
       });
 
@@ -159,4 +154,3 @@ export const AuthProvider = ({ children }) => {
 };
 
 export const useAuth = () => useContext(AuthContext);
-

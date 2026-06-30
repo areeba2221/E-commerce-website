@@ -3,7 +3,7 @@ import myLogo from "/src/assets/logo.png";
 import { NavLink, useNavigate } from "react-router-dom";
 import { changePassword } from "../../api/auth";
 import { useAuth } from "../../context/AuthContext";
-import { UserIcon, SearchIcon, HeartIcon, CartIcon, } from "/src/assets/Svg";
+import { UserIcon, SearchIcon, HeartIcon, CartIcon } from "/src/assets/Svg";
 import { useCart } from "../../context/CartContext";
 
 const navLinks = [
@@ -21,7 +21,7 @@ const Navbar = () => {
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const dropdownRef = useRef(null);
 
-  const cartCount = cartItems.reduce((sum, item) => sum + item.quantity, 0); 
+  const cartCount = cartItems.reduce((sum, item) => sum + item.quantity, 0);
 
   useEffect(() => {
     const handleClickOutside = (e) => {
@@ -31,7 +31,7 @@ const Navbar = () => {
     };
     document.addEventListener("mousedown", handleClickOutside);
     return () => document.removeEventListener("mousedown", handleClickOutside);
-  }, []);  
+  }, []);
 
   const logout = () => {
     localStorage.removeItem("token");
@@ -43,10 +43,7 @@ const Navbar = () => {
     <>
       <nav className="w-full bg-white shadow-sm px-8 py-4">
         <div className="max-w-7xl mx-auto flex items-center justify-between">
-          <button
-            onClick={() => navigate("/home")}
-            className="cursor-pointer"
-          >
+          <button onClick={() => navigate("/home")} className="cursor-pointer">
             <img src={myLogo} alt="Logo" />
           </button>
 
@@ -81,15 +78,9 @@ const Navbar = () => {
               {dropdownOpen && (
                 <div className="absolute right-0 mt-4 w-60 bg-[#F9F1E7] shadow-lg rounded-xl z-40">
                   <div className="p-4 border-b">
-                    <p className="font-bold">
-                      {user?.name || "User"}
-                    </p>
-                    <p className="text-sm text-gray-500">
-                      {user?.email || ""}
-                    </p>
+                    <p className="font-bold">{user?.name || "User"}</p>
+                    <p className="text-sm text-gray-500">{user?.email || ""}</p>
                   </div>
-
-                  
 
                   <button
                     onClick={logout}
@@ -101,30 +92,30 @@ const Navbar = () => {
               )}
             </div>
             <button className="hover:text-[#C8A96E]">
-                <SearchIcon />
+              <SearchIcon />
             </button>
             <button className="hover:text-[#C8A96E]">
               <HeartIcon />
             </button>
-            
+
             <button
-            onClick={() => setIsCartOpen(true)}
-            className="hover:text-[#C8A96E] transition-colors duration-200 relative"
+              onClick={() => setIsCartOpen(true)}
+              className="hover:text-[#C8A96E] transition-colors duration-200 relative"
             >
               <CartIcon />
               {cartCount > 0 && (
-              <span className="absolute -top-2 -right-2 bg-[#B88E2F] text-white 
+                <span
+                  className="absolute -top-2 -right-2 bg-[#B88E2F] text-white 
                 text-[11px] font-semibold w-5 h-5 rounded-full flex items-center 
-                justify-center">
-                {cartCount}
-              </span>
-            )}
+                justify-center"
+                >
+                  {cartCount}
+                </span>
+              )}
             </button>
-            
           </div>
         </div>
       </nav>
-
     </>
   );
 };

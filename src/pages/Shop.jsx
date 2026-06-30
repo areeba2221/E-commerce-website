@@ -6,16 +6,16 @@ import ShopServices from "../components/features/ShopServices";
 import Footer from "../components/layouts/Footer";
 
 const Shop = () => {
-    return (
-        <>
-        <Navbar/>
-        <ShopHeroSection/>
-        <ShopFilterBar />
-        <ShopProducts/>
-        <ShopServices/>
-        <Footer/>
-        </>
-    );
-}
- 
+  return (
+    <>
+      <Navbar />
+      <ShopHeroSection />
+      <ShopFilterBar />
+      <ShopProducts />
+      <ShopServices />
+      <Footer />
+    </>
+  );
+};
+
 export default Shop;

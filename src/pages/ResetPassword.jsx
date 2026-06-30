@@ -28,31 +28,27 @@ const ResetPassword = () => {
 
       navigate("/login");
     } catch (error) {
-      toast.error(
-        error.response?.data?.message || "Failed"
-      );
+      toast.error(error.response?.data?.message || "Failed");
     }
   };
 
   return (
     <div className="min-h-screen bg-[#B88E2F]  flex items-center justify-center">
-        <img
-                src={BG}
-                alt="Background image"
-                className="absolute inset-0 w-full h-full object-cover z-0 opacity-8 pointer-events-none"
-                />
+      <img
+        src={BG}
+        alt="Background image"
+        className="absolute inset-0 w-full h-full object-cover z-0 opacity-8 pointer-events-none"
+      />
       <form
         onSubmit={handleSubmit}
         className="bg-white p-8 shadow-lg rounded-lg w-96 relative z-10"
       >
         <img
-                src={lock}
-                alt="lock image" 
-                className="flex justify-between items-center content-center p-4 mb-2"
-                />
-        <h2 className="text-2xl font-bold mb-6">
-          Reset Password
-        </h2>
+          src={lock}
+          alt="lock image"
+          className="flex justify-between items-center content-center p-4 mb-2"
+        />
+        <h2 className="text-2xl font-bold mb-6">Reset Password</h2>
 
         <input
           type="password"
@@ -63,9 +59,7 @@ const ResetPassword = () => {
                             focus:outline-none focus:ring-2 focus:ring-[#B88E2F] mb-4 z-999"
         />
 
-        <button
-          className="w-full bg-[#B88E2F] text-white py-3 rounded-full hover:bg-[#9a7526]"
-        >
+        <button className="w-full bg-[#B88E2F] text-white py-3 rounded-full hover:bg-[#9a7526]">
           Reset Password
         </button>
       </form>

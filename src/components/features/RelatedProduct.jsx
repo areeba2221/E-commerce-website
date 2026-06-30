@@ -28,39 +28,53 @@ function ProductCard({ product }) {
         />
 
         {product.comparePrice && (
-          <span className="absolute top-5 right-5 w-12 h-12 rounded-full flex items-center
-            justify-center text-white text-[15px] font-medium z-10 bg-[#E97171]">
+          <span
+            className="absolute top-5 right-5 w-12 h-12 rounded-full flex items-center
+            justify-center text-white text-[15px] font-medium z-10 bg-[#E97171]"
+          >
             Sale
           </span>
         )}
         {product.tags?.includes("new") && (
-          <span className="absolute top-5 right-5 w-12 h-12 rounded-full flex items-center
-            justify-center text-white text-[15px] font-medium z-10 bg-[#2EC1AC]">
+          <span
+            className="absolute top-5 right-5 w-12 h-12 rounded-full flex items-center
+            justify-center text-white text-[15px] font-medium z-10 bg-[#2EC1AC]"
+          >
             New
           </span>
         )}
 
-        <div className={`absolute inset-0 bg-[#3A3A3A]/70 flex flex-col items-center 
+        <div
+          className={`absolute inset-0 bg-[#3A3A3A]/70 flex flex-col items-center 
           justify-center gap-6 transition-opacity duration-300 z-20
           ${isHovered ? "opacity-100" : "opacity-0"}`}
         >
           <button
-            onClick={(e) => handleAction(e, () => console.log("Added to cart:", product._id))}
+            onClick={(e) =>
+              handleAction(e, () => console.log("Added to cart:", product._id))
+            }
             className="bg-white text-[#B88E2F] font-semibold text-[16px] px-14 py-3 
-              shadow-md hover:bg-[#B88E2F] hover:text-white transition-colors duration-200">
+              shadow-md hover:bg-[#B88E2F] hover:text-white transition-colors duration-200"
+          >
             Add to cart
           </button>
           <div className="flex items-center gap-5 text-white text-[16px] font-semibold">
-            <button onClick={(e) => handleAction(e, () => console.log("Shared"))}
-              className="flex items-center gap-1 hover:text-[#B88E2F] transition-colors">
+            <button
+              onClick={(e) => handleAction(e, () => console.log("Shared"))}
+              className="flex items-center gap-1 hover:text-[#B88E2F] transition-colors"
+            >
               <ShareIcon /> Share
             </button>
-            <button onClick={(e) => handleAction(e, () => console.log("Compared"))}
-              className="flex items-center gap-1 hover:text-[#B88E2F] transition-colors">
+            <button
+              onClick={(e) => handleAction(e, () => console.log("Compared"))}
+              className="flex items-center gap-1 hover:text-[#B88E2F] transition-colors"
+            >
               <CompareIcon /> Compare
             </button>
-            <button onClick={(e) => handleAction(e, () => console.log("Liked"))}
-              className="flex items-center gap-1 hover:text-[#B88E2F] transition-colors">
+            <button
+              onClick={(e) => handleAction(e, () => console.log("Liked"))}
+              className="flex items-center gap-1 hover:text-[#B88E2F] transition-colors"
+            >
               <ProductHeartIcon /> Like
             </button>
           </div>
@@ -68,8 +82,12 @@ function ProductCard({ product }) {
       </div>
 
       <div className="p-4 pt-6 pb-8 pl-6">
-        <h3 className="font-bold text-[#3A3A3A] text-[24px] mb-2">{product.name}</h3>
-        <p className="text-[#898989] text-[16px] mb-2 font-medium">{product.description}</p>
+        <h3 className="font-bold text-[#3A3A3A] text-[24px] mb-2">
+          {product.name}
+        </h3>
+        <p className="text-[#898989] text-[16px] mb-2 font-medium">
+          {product.description}
+        </p>
         <div className="flex items-center justify-between pr-4">
           <span className="font-semibold text-[#3A3A3A] text-[20px]">
             Rs. {product.price?.toLocaleString()}
@@ -88,35 +106,35 @@ function ProductCard({ product }) {
 const RelatedProduct = () => {
   const { id } = useParams();
   const [relatedProducts, setRelatedProducts] = useState([]);
-  const [loading, setLoading]         = useState(true);
-  const [loadingMore, setLoadingMore] = useState(false); 
-  const [error, setError]             = useState(null);
-  const [page, setPage]               = useState(1);      
-  const [hasMore, setHasMore]         = useState(true);   
-  const [category, setCategory]       = useState(null); 
+  const [loading, setLoading] = useState(true);
+  const [loadingMore, setLoadingMore] = useState(false);
+  const [error, setError] = useState(null);
+  const [page, setPage] = useState(1);
+  const [hasMore, setHasMore] = useState(true);
+  const [category, setCategory] = useState(null);
 
-  const PAGE_SIZE = 4; 
+  const PAGE_SIZE = 4;
 
   const fetchRelated = (cat, pageNum, isLoadMore = false) => {
     isLoadMore ? setLoadingMore(true) : setLoading(true);
 
     getProducts(`?category=${cat}&page=${pageNum}&limit=${PAGE_SIZE}`)
-      .then(res => {
-        const data       = res.data?.data || [];
+      .then((res) => {
+        const data = res.data?.data || [];
         const totalPages = res.data?.pagination?.totalPages || 1;
 
-       const filtered = data.filter(p => p._id !== id);
+        const filtered = data.filter((p) => p._id !== id);
 
         if (isLoadMore) {
-          setRelatedProducts(prev => [...prev, ...filtered]); 
+          setRelatedProducts((prev) => [...prev, ...filtered]);
         } else {
-          setRelatedProducts(filtered);      
+          setRelatedProducts(filtered);
         }
 
         setHasMore(pageNum < totalPages);
         isLoadMore ? setLoadingMore(false) : setLoading(false);
       })
-      .catch(err => {
+      .catch((err) => {
         console.log(err);
         setError("Related products is not load");
         isLoadMore ? setLoadingMore(false) : setLoading(false);
@@ -128,7 +146,7 @@ const RelatedProduct = () => {
     setLoading(true);
 
     getProduct(id)
-      .then(res => {
+      .then((res) => {
         const cat = res.data?.data?.category;
         if (!cat) {
           setLoading(false);
@@ -137,7 +155,7 @@ const RelatedProduct = () => {
         setCategory(cat);
         fetchRelated(cat, 1);
       })
-      .catch(err => {
+      .catch((err) => {
         console.log(err);
         setError("Product category is not load");
         setLoading(false);
@@ -152,12 +170,11 @@ const RelatedProduct = () => {
   };
 
   if (loading) return <p className="text-center py-16">Loading...</p>;
-  if (error)   return <p className="text-center py-16 text-red-500">{error}</p>;
+  if (error) return <p className="text-center py-16 text-red-500">{error}</p>;
   if (relatedProducts.length === 0) return null;
 
   return (
     <div className="border-t border-[#D9D9D9] mt-4 font-Poppins">
-
       <div className="text-center p-10 mt-10 text-[36px] text-[#000000] font-medium">
         Related Products
       </div>
@@ -176,16 +193,18 @@ const RelatedProduct = () => {
             className="border w-61.25 h-12 border-[#B88E2F] mb-25 text-[#B88E2F] font-semibold 
               px-16 py-3 text-[16px] leading-[150%] tracking-widest 
               hover:bg-[#B88E2F] hover:text-white transition-colors duration-200
-              disabled:opacity-50 disabled:cursor-not-allowed">
+              disabled:opacity-50 disabled:cursor-not-allowed"
+          >
             {loadingMore ? "Loading..." : productsSectionData.buttonText}
           </button>
         ) : (
           relatedProducts.length > PAGE_SIZE && (
-            <p className="text-[#9F9F9F] text-[16px] mb-25">All products loaded</p>
+            <p className="text-[#9F9F9F] text-[16px] mb-25">
+              All products loaded
+            </p>
           )
         )}
       </div>
-
     </div>
   );
 };

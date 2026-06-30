@@ -2,8 +2,8 @@ import React, { useState } from "react";
 import { registerUser } from "../api/auth";
 import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
-import LoginBG from "/src/assets/login image.jpg"
-import myLogo from '/src/assets/logo.png';
+import LoginBG from "/src/assets/login image.jpg";
+import myLogo from "/src/assets/logo.png";
 import { EyeIcon, EyeOff } from "/src/assets/Svg";
 
 const Register = () => {
@@ -17,7 +17,7 @@ const Register = () => {
     name: "",
     email: "",
     password: "",
-    confirmPassword: ""
+    confirmPassword: "",
   });
 
   const [loading, setLoading] = useState(false);
@@ -27,7 +27,6 @@ const Register = () => {
   };
 
   const validate = () => {
-
     if (!formData.name || formData.name.trim().length < 3) {
       alert("Name must be at least 3 characters");
       return false;
@@ -53,7 +52,6 @@ const Register = () => {
     return true;
   };
 
-
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -63,46 +61,36 @@ const Register = () => {
       setLoading(true);
 
       const { confirmPassword, ...dataToSend } = formData;
-      
+
       const res = await registerUser(dataToSend);
 
       alert("Register Successful");
 
       localStorage.setItem("token", res.token);
-      
 
-      navigate('/');
-
+      navigate("/");
     } catch (err) {
       console.log(err);
-      alert(
-        err.response?.data?.message ||
-        err.message
-      );
+      alert(err.response?.data?.message || err.message);
     } finally {
       setLoading(false);
     }
   };
 
-
   return (
     <div className="min-h-screen bg-[#B88E2F] flex items-center justify-center p-6">
       <div className="bg-[#F9F1E7] rounded-3xl overflow-hidden shadow-2xl w-full max-w-5xl grid md:grid-cols-2">
-
         <div className="p-12 flex flex-col justify-center">
-
-          <img
-            src={myLogo}
-            alt="Company Logo"
-            className="mb-6 w-46" />
+          <img src={myLogo} alt="Company Logo" className="mb-6 w-46" />
 
           <h2 className="text-3xl font-bold mb-5">Create Account</h2>
 
           <form onSubmit={handleSubmit} className="space-y-5">
-
             <div>
-              <label htmlFor="name"
-                className="block text-sm font-medium text-gray-700 mb-1">
+              <label
+                htmlFor="name"
+                className="block text-sm font-medium text-gray-700 mb-1"
+              >
                 Full Name
               </label>
               <input
@@ -118,8 +106,10 @@ const Register = () => {
               />
             </div>
             <div>
-              <label htmlFor="email"
-                className="block text-sm font-medium text-gray-700 mb-1">
+              <label
+                htmlFor="email"
+                className="block text-sm font-medium text-gray-700 mb-1"
+              >
                 Email Address
               </label>
               <input
@@ -136,8 +126,10 @@ const Register = () => {
             </div>
 
             <div>
-              <label htmlFor="password"
-                className="block text-sm font-medium text-gray-700 mb-1">
+              <label
+                htmlFor="password"
+                className="block text-sm font-medium text-gray-700 mb-1"
+              >
                 Password
               </label>
               <div className="relative">
@@ -157,15 +149,20 @@ const Register = () => {
                   className="absolute right-4 top-3"
                   onClick={() => setShowPassword(!showPassword)}
                 >
-                  {showPassword ? <EyeOff className="w-5 h-5" /> : <EyeIcon className="w-5 h-5" />}
+                  {showPassword ? (
+                    <EyeOff className="w-5 h-5" />
+                  ) : (
+                    <EyeIcon className="w-5 h-5" />
+                  )}
                 </button>
               </div>
-
             </div>
 
             <div>
-              <label htmlFor="confirmPassword"
-                className="block text-sm font-medium text-gray-700 mb-1">
+              <label
+                htmlFor="confirmPassword"
+                className="block text-sm font-medium text-gray-700 mb-1"
+              >
                 Confirm Password
               </label>
               <div className="relative">
@@ -185,25 +182,30 @@ const Register = () => {
                   className="absolute right-4 top-3"
                   onClick={() => setShowConfirmPassword(!showConfirmPassword)}
                 >
-                  {showConfirmPassword ? <EyeOff className="w-5 h-5" /> : <EyeIcon className="w-5 h-5" />}
-
+                  {showConfirmPassword ? (
+                    <EyeOff className="w-5 h-5" />
+                  ) : (
+                    <EyeIcon className="w-5 h-5" />
+                  )}
                 </button>
               </div>
-
             </div>
 
             <button
               type="submit"
               disabled={loading}
-              className="w-full bg-[#B88E2F] text-white py-3 rounded-full hover:bg-[#9a7526]">
+              className="w-full bg-[#B88E2F] text-white py-3 rounded-full hover:bg-[#9a7526]"
+            >
               {loading ? "Creating Account..." : "Register"}
             </button>
           </form>
 
           <p className="text-center mt-6">
             Already have an account?
-            <Link to="/login"
-              className="text-[#B88E2F] hover:underline font-semibold ml-2 cursor-pointer">
+            <Link
+              to="/login"
+              className="text-[#B88E2F] hover:underline font-semibold ml-2 cursor-pointer"
+            >
               Login
             </Link>
           </p>

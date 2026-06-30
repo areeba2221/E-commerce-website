@@ -6,15 +6,15 @@ import ShopServices from "../components/features/ShopServices";
 import Footer from "../components/layouts/Footer";
 
 const Contact = () => {
-    return (
-        <>
-        <Navbar/>
-        <ContactHero/>
-        <ContactSection/>
-        <ShopServices/>
-            <Footer />
-        </>
-    );
-}
- 
+  return (
+    <>
+      <Navbar />
+      <ContactHero />
+      <ContactSection />
+      <ShopServices />
+      <Footer />
+    </>
+  );
+};
+
 export default Contact;

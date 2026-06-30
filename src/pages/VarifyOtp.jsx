@@ -39,9 +39,7 @@ const VerifyOtp = () => {
         state: { email, otp },
       });
     } catch (error) {
-      toast.error(
-        error.response?.data?.message || "Invalid OTP"
-      );
+      toast.error(error.response?.data?.message || "Invalid OTP");
     }
   };
 

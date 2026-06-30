@@ -6,15 +6,15 @@ import ShopServices from "../components/features/ShopServices";
 import Footer from "../components/layouts/Footer";
 
 const Checkout = () => {
-    return (
-        <>
-        <Navbar/>
-        <CheckoutHero/>
-        <CheckoutSection/>
-        <ShopServices/>
-            <Footer />
-        </>
-    );
-}
- 
+  return (
+    <>
+      <Navbar />
+      <CheckoutHero />
+      <CheckoutSection />
+      <ShopServices />
+      <Footer />
+    </>
+  );
+};
+
 export default Checkout;

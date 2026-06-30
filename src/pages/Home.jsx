@@ -8,17 +8,17 @@ import ShareSetup from "../components/features/ShareSetup";
 import Footer from "../components/layouts/Footer";
 
 const Home = () => {
-    return (
-        <div className="min-h-screen font-poppins">
-            <Navbar/>
-            <Hero />
-            <BrowseRange />
-            <OurProducts />
-            <Inspirations />
-            <ShareSetup />
-            <Footer />
-        </div>
-    );
-}
- 
+  return (
+    <div className="min-h-screen font-poppins">
+      <Navbar />
+      <Hero />
+      <BrowseRange />
+      <OurProducts />
+      <Inspirations />
+      <ShareSetup />
+      <Footer />
+    </div>
+  );
+};
+
 export default Home;

@@ -6,7 +6,6 @@ import RelatedProduct from "../components/features/RelatedProduct";
 import Footer from "../components/layouts/Footer";
 
 const SingleProduct = () => {
-
   useEffect(() => {
     window.scrollTo({
       top: 0,
@@ -14,15 +13,15 @@ const SingleProduct = () => {
     });
   }, []);
 
-  return ( 
+  return (
     <>
-    <Navbar/>
-    <ShowProduct/>
-    <ProductDesciption/>
-    <RelatedProduct/>
-    <Footer />
+      <Navbar />
+      <ShowProduct />
+      <ProductDesciption />
+      <RelatedProduct />
+      <Footer />
     </>
-   );
-}
- 
+  );
+};
+
 export default SingleProduct;

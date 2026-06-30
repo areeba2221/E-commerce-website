@@ -19,48 +19,42 @@ import OrderSuccess from "./pages/OrderSuccess";
 import { ToastContainer } from "react-toastify";
 
 function App() {
-
   return (
-
     <>
+      <ToastContainer
+        position="top-right"
+        autoClose={3000}
+        closeOnClick
+        pauseOnHover
+        theme="dark"
+      />
 
-    <ToastContainer
-                    position="top-right"
-                    autoClose={3000}
-                    closeOnClick
-                    pauseOnHover
-                    theme="dark"
-                />
-    
-    <AuthProvider>
-      <CartProvider>
-        <BrowserRouter>
+      <AuthProvider>
+        <CartProvider>
+          <BrowserRouter>
+            <CartDrawer />
+            <Routes>
+              <Route path="/" element={<Navigate to="/login" />} />
 
-          <CartDrawer />
-          <Routes>
-            <Route path="/" element={<Navigate to="/login" />} />
-
-            <Route path="/login" element={<Login />} />
-            <Route path="/register" element={<Register />} />
-            <Route path="/forgot-password" element={<ForgotPassword />} />
-            <Route path="/verify-otp" element={<VerifyOtp />} />
-            <Route path="/reset-password" element={<ResetPassword />} />
-            <Route path="/home" element={<Home />} />
-            <Route path="/shop" element={<Shop />} />
-            <Route path="/about" element={<About />} />
-            <Route path="/contact" element={<Contact />} />
-            <Route path="/product/:id" element={<SingleProduct />} />
-            <Route path="/cart" element={<Cart />} />
-            <Route path="/checkout" element={<Checkout />} />
-            <Route path="/order-success" element={<OrderSuccess />} />
-            {/* <Route path="/order-success/:orderId" element={<OrderSuccess />} /> */}
-          </Routes>
-        </BrowserRouter>
-      </CartProvider>
-    </AuthProvider>
+              <Route path="/login" element={<Login />} />
+              <Route path="/register" element={<Register />} />
+              <Route path="/forgot-password" element={<ForgotPassword />} />
+              <Route path="/verify-otp" element={<VerifyOtp />} />
+              <Route path="/reset-password" element={<ResetPassword />} />
+              <Route path="/home" element={<Home />} />
+              <Route path="/shop" element={<Shop />} />
+              <Route path="/about" element={<About />} />
+              <Route path="/contact" element={<Contact />} />
+              <Route path="/product/:id" element={<SingleProduct />} />
+              <Route path="/cart" element={<Cart />} />
+              <Route path="/checkout" element={<Checkout />} />
+              <Route path="/order-success" element={<OrderSuccess />} />
+              {/* <Route path="/order-success/:orderId" element={<OrderSuccess />} /> */}
+            </Routes>
+          </BrowserRouter>
+        </CartProvider>
+      </AuthProvider>
     </>
-
-    
   );
 }
 

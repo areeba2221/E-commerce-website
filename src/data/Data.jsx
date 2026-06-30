@@ -33,7 +33,7 @@ import Grifo from "/src/assets/Grifo.png";
 import Muggo from "/src/assets/Muggo.png";
 import Pingky from "/src/assets/Pingky.png";
 import Potty from "/src/assets/Potty.png";
-import SideSofa from "/src/assets/side sofa.png"
+import SideSofa from "/src/assets/side sofa.png";
 
 export const productsData = [
   {
@@ -44,7 +44,7 @@ export const productsData = [
     originalPrice: "Rp 3,500.000",
     badge: { label: "-30%", type: "discount" },
     image: Syltherine,
-    images: [SideSofa] 
+    images: [SideSofa],
   },
   {
     id: 2,
@@ -116,7 +116,6 @@ export const productsSectionData = {
   buttonText: "Show More",
 };
 
-
 //Inspiration Data
 import BedRoom from "/src/assets/Bed Room.png";
 import DiningRoom from "/src/assets/Dining Room.png";
@@ -160,7 +159,6 @@ export const inspirationContent = {
     "Our designer already made a lot of beautiful prototipe of rooms that inspire you",
   buttonText: "Explore More",
 };
-
 
 //ShareSetup Data
 import Shelfroom from "/src/assets/Rectangle 36.png";
@@ -256,7 +254,6 @@ export const productData = [
     badge: { label: "New", type: "new" },
     image: Respira,
   },
-  
 ];
 
 //ShopHeroSection Data
@@ -290,7 +287,6 @@ export const shopFilterData = {
 };
 
 export const CheckoutData = {
-
   sortOptions: [
     "Sri Lanka",
     "United States",
@@ -308,14 +304,25 @@ export const CheckoutData = {
   ],
 };
 
-
-
 //Footer Data
+
 export const footerLinks = [
-  "Home",
-  "Shop",
-  "About",
-  "Contact",
+  {
+    name: "Home",
+    path: "/home",
+  },
+  {
+    name: "Shop",
+    path: "/shop",
+  },
+  {
+    name: "About",
+    path: "/about",
+  },
+  {
+    name: "Contact",
+    path: "/contact",
+  },
 ];
 export const footerHelpLinks = [
   "Payment Options",
@@ -326,5 +333,4 @@ export const footerAddress = {
   line1: "400 University Drive Suite 200 Coral Gables,",
   line2: "FL 33134 USA",
 };
-export const footerCopyright =
-  "2023 furino. All rights reserved";
+export const footerCopyright = "2023 furino. All rights reserved";

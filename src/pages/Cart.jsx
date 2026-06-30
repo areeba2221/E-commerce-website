@@ -6,15 +6,15 @@ import ShopServices from "../components/features/ShopServices";
 import Footer from "../components/layouts/Footer";
 
 const Cart = () => {
-    return (
-        <>
-            <Navbar/>
-            <CartHero/>
-            <CartSection/>
-            <ShopServices/>
-            <Footer />
-        </>
-    );
-}
- 
+  return (
+    <>
+      <Navbar />
+      <CartHero />
+      <CartSection />
+      <ShopServices />
+      <Footer />
+    </>
+  );
+};
+
 export default Cart;

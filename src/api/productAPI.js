@@ -1,7 +1,6 @@
-import API from './axios';
+import API from "./axios";
 
 export const getProducts = (query = "") => API.get(`/products${query}`);
 export const getProduct = (id) => API.get(`/products/${id}`);
 
-export const getCategories = () => API.get('/products/categories');
-
+export const getCategories = () => API.get("/products/categories");
