@@ -15,7 +15,7 @@ const navLinks = [
 
 const Navbar = () => {
   const navigate = useNavigate();
-  const { user, setUser } = useAuth();
+  const { user, logout: logoutAuth } = useAuth();
   const { cartItems, setIsCartOpen } = useCart();
   const [activePage, setActivePage] = useState("Home");
   const [dropdownOpen, setDropdownOpen] = useState(false);
@@ -34,8 +34,7 @@ const Navbar = () => {
   }, []);
 
   const logout = () => {
-    localStorage.removeItem("token");
-    setUser(null);
+    logoutAuth();
     navigate("/login");
   };
 

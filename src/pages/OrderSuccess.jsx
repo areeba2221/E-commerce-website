@@ -7,15 +7,14 @@ import orderBg from "/src/assets/living.jpg";
 const OrderSuccess = () => {
   return (
     <>
-     <Navbar />
+      <Navbar />
       <div className="relative min-h-screen flex items-center justify-center w-full antialiased font-sans overflow-hidden">
-         
         <img
           src={orderBg}
           alt="Background"
           className="absolute inset-0 w-full h-full object-cover z-0"
         />
-        
+
         <div
           className="w-full max-w-xl mx-4 absolute z-10 bg-[#F9F1E7]/95 backdrop-blur-sm 
         rounded-[32px] shadow-2xl overflow-hidden border border-slate-200/50"

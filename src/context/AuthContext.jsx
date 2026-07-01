@@ -1,42 +1,44 @@
-import { createContext, useContext, useState, useEffect } from "react";
+import { createContext, useContext, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { loginUser, registerUser, getProfile } from "../api/auth";
 import Swal from "sweetalert2";
+import { toast } from "react-toastify";
+import {
+  setAuthUser,
+  setAuthToken,
+  setAuthLoading,
+  clearAuth,
+} from "../features/auth/authSlice.js";
 
 const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
-  const [user, setUser] = useState(
-    JSON.parse(localStorage.getItem("user")) || null,
-  );
-
-  const [token, setToken] = useState(localStorage.getItem("token") || null);
-
-  const [loading, setLoading] = useState(true);
+  const dispatch = useDispatch();
+  const { user, token, loading } = useSelector((state) => state.auth);
 
   useEffect(() => {
     const fetchProfile = async () => {
       const savedToken = localStorage.getItem("token");
 
       if (!savedToken) {
-        setLoading(false);
+        dispatch(setAuthLoading(false));
         return;
       }
 
       try {
         const res = await getProfile();
-        setUser(res.data.data);
+        dispatch(setAuthUser(res.data.data));
       } catch (error) {
         localStorage.removeItem("token");
         localStorage.removeItem("user");
-        setUser(null);
-        setToken(null);
+        dispatch(clearAuth());
       } finally {
-        setLoading(false);
+        dispatch(setAuthLoading(false));
       }
     };
 
     fetchProfile();
-  }, []);
+  }, [dispatch]);
 
   const login = async (email, password) => {
     try {
@@ -47,16 +49,10 @@ export const AuthProvider = ({ children }) => {
       localStorage.setItem("token", token);
       localStorage.setItem("user", JSON.stringify(user));
 
-      setToken(token);
-      setUser(user);
+      dispatch(setAuthToken(token));
+      dispatch(setAuthUser(user));
 
-      Swal.fire({
-        icon: "success",
-        title: `Welcome, ${user.name}`,
-        timer: 1500,
-        showConfirmButton: false,
-        timerProgressBar: true,
-      });
+      toast.success("Login successful!");
 
       return {
         success: true,
@@ -91,17 +87,10 @@ export const AuthProvider = ({ children }) => {
       localStorage.setItem("token", token);
       localStorage.setItem("user", JSON.stringify(user));
 
-      setToken(token);
-      setUser(user);
+      dispatch(setAuthToken(token));
+      dispatch(setAuthUser(user));
 
-      Swal.fire({
-        icon: "success",
-        title: "Account Created Successfully",
-        text: `Welcome ${user.name}`,
-        timer: 1500,
-        showConfirmButton: false,
-        timerProgressBar: true,
-      });
+      toast.success("Account created successfully!");
 
       return {
         success: true,
@@ -125,15 +114,9 @@ export const AuthProvider = ({ children }) => {
     localStorage.removeItem("token");
     localStorage.removeItem("user");
 
-    setToken(null);
-    setUser(null);
+    dispatch(clearAuth());
 
-    Swal.fire({
-      icon: "success",
-      title: "Logged Out Successfully",
-      timer: 1200,
-      showConfirmButton: false,
-    });
+    toast.success("Logged out successfully!");
   };
 
   return (
@@ -145,7 +128,7 @@ export const AuthProvider = ({ children }) => {
         login,
         register,
         logout,
-        setUser,
+        setUser: (user) => dispatch(setAuthUser(user)),
       }}
     >
       {children}

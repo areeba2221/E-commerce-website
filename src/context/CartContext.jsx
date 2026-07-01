@@ -1,25 +1,36 @@
-import { createContext, useContext, useState, useEffect } from "react";
+import { createContext, useContext, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { useAuth } from "./AuthContext";
 import * as cartAPI from "../api/cartAPI";
 import Swal from "sweetalert2";
+import { toast } from "react-toastify";
+import {
+  setCartItems as setCartItemsAction,
+  setCartSubtotal as setCartSubtotalAction,
+  setCartOpen as setCartOpenAction,
+  setCartLoading as setCartLoadingAction,
+  clearCart as clearCartAction,
+} from "../features/cart/cartSlice";
 
 const CartContext = createContext();
 
 export const CartProvider = ({ children }) => {
+  const dispatch = useDispatch();
   const { user } = useAuth();
-  const [cartItems, setCartItems] = useState([]);
-  const [subtotal, setSubtotal] = useState(0);
-  const [isCartOpen, setIsCartOpen] = useState(false);
-  const [loading, setLoading] = useState(false);
+  const {
+    items: cartItems,
+    subtotal,
+    isCartOpen,
+    loading,
+  } = useSelector((state) => state.cart);
 
   useEffect(() => {
     if (user) {
       fetchCart();
     } else {
-      setCartItems([]);
-      setSubtotal(0);
+      dispatch(clearCartAction());
     }
-  }, [user]);
+  }, [dispatch, user]);
 
   const fetchCart = async () => {
     try {
@@ -35,8 +46,8 @@ export const CartProvider = ({ children }) => {
         quantity: item.quantity,
       }));
 
-      setCartItems(flatItems);
-      setSubtotal(res.data?.data?.subtotal || 0);
+      dispatch(setCartItemsAction(flatItems));
+      dispatch(setCartSubtotalAction(res.data?.data?.subtotal || 0));
     } catch (err) {
       console.log(err);
     }
@@ -53,28 +64,21 @@ export const CartProvider = ({ children }) => {
       return;
     }
 
-    setLoading(true);
+    dispatch(setCartLoadingAction(true));
     try {
       await cartAPI.addToCart(product._id, quantity);
       await fetchCart();
 
-      Swal.fire({
-        icon: "success",
-        title: "Item added to cart",
-        timer: 1200,
-        showConfirmButton: false,
-      });
+      toast.success("Item added to cart!");
 
-      setIsCartOpen(true);
+      dispatch(setCartOpenAction(true));
     } catch (err) {
-      Swal.fire({
-        icon: "error",
-        title: "Item could not be added",
-        text: err.response?.data?.message || "Please try again",
-        confirmButtonColor: "#B88E2F",
-      });
+      toast.error(
+        err.response?.data?.message ||
+          "Failed to add item to cart. Please try again.",
+      );
     } finally {
-      setLoading(false);
+      dispatch(setCartLoadingAction(false));
     }
   };
 
@@ -83,12 +87,10 @@ export const CartProvider = ({ children }) => {
       await cartAPI.updateCartItem(productId, quantity);
       await fetchCart();
     } catch (err) {
-      Swal.fire({
-        icon: "error",
-        title: "Failed to update",
-        text: err.response?.data?.message,
-        confirmButtonColor: "#B88E2F",
-      });
+      toast.error(
+        err.response?.data?.message ||
+          "Failed to update item quantity. Please try again.",
+      );
     }
   };
 
@@ -104,8 +106,7 @@ export const CartProvider = ({ children }) => {
   const clearCartItems = async () => {
     try {
       await cartAPI.clearCart();
-      setCartItems([]);
-      setSubtotal(0);
+      dispatch(clearCartAction());
     } catch (err) {
       console.log(err);
     }
@@ -115,10 +116,10 @@ export const CartProvider = ({ children }) => {
     <CartContext.Provider
       value={{
         cartItems,
-        setCartItems,
+        setCartItems: (items) => dispatch(setCartItemsAction(items)),
         subtotal,
         isCartOpen,
-        setIsCartOpen,
+        setIsCartOpen: (value) => dispatch(setCartOpenAction(value)),
         loading,
         addToCart,
         updateQuantity,
