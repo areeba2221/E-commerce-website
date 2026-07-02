@@ -5,25 +5,18 @@ import Swal from "sweetalert2";
 import { toast } from "react-toastify";
 import {
   setAuthUser,
-  setAuthToken,
-  setAuthLoading,
-  clearAuth,
+  signout,
 } from "../features/auth/authSlice.js";
 
 const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
   const dispatch = useDispatch();
-  const { user, token, loading } = useSelector((state) => state.auth);
+  const { user, token } = useSelector((state) => state.auth);
 
   useEffect(() => {
     const fetchProfile = async () => {
       const savedToken = localStorage.getItem("token");
-
-      if (!savedToken) {
-        dispatch(setAuthLoading(false));
-        return;
-      }
 
       try {
         const res = await getProfile();
@@ -31,10 +24,10 @@ export const AuthProvider = ({ children }) => {
       } catch (error) {
         localStorage.removeItem("token");
         localStorage.removeItem("user");
-        dispatch(clearAuth());
-      } finally {
-        dispatch(setAuthLoading(false));
-      }
+        dispatch(signout());}
+      // } finally {
+      //   dispatch(setAuthLoading(false));
+      // }
     };
 
     fetchProfile();
@@ -49,8 +42,7 @@ export const AuthProvider = ({ children }) => {
       localStorage.setItem("token", token);
       localStorage.setItem("user", JSON.stringify(user));
 
-      dispatch(setAuthToken(token));
-      dispatch(setAuthUser(user));
+      dispatch(setAuthUser({ token, user }));
 
       toast.success("Login successful!");
 
@@ -87,8 +79,8 @@ export const AuthProvider = ({ children }) => {
       localStorage.setItem("token", token);
       localStorage.setItem("user", JSON.stringify(user));
 
-      dispatch(setAuthToken(token));
-      dispatch(setAuthUser(user));
+     
+      dispatch(setAuthUser({ token, user }));
 
       toast.success("Account created successfully!");
 
@@ -114,7 +106,7 @@ export const AuthProvider = ({ children }) => {
     localStorage.removeItem("token");
     localStorage.removeItem("user");
 
-    dispatch(clearAuth());
+    dispatch(signout());
 
     toast.success("Logged out successfully!");
   };
@@ -124,7 +116,6 @@ export const AuthProvider = ({ children }) => {
       value={{
         user,
         token,
-        loading,
         login,
         register,
         logout,

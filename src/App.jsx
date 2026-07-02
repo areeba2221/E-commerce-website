@@ -16,6 +16,7 @@ import About from "./pages/About";
 import Contact from "./pages/Contact";
 import Cart from "./pages/Cart";
 import SingleProduct from "./pages/SingleProduct";
+import Wishlist from "./pages/Wishlist";
 import { AuthProvider, useAuth } from "./context/AuthContext";
 import { CartProvider } from "/src/context/CartContext";
 import CartDrawer from "./components/features/CartDrawer";
@@ -116,6 +117,14 @@ function AppRoutes() {
           element={
             <AuthRoute>
               <Cart />
+            </AuthRoute>
+          }
+        />
+        <Route
+          path="/wishlist"
+          element={
+            <AuthRoute>
+              <Wishlist />
             </AuthRoute>
           }
         />

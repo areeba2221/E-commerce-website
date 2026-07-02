@@ -1,14 +1,20 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
 import { getProducts } from "/src/api/productAPI";
 import { useCart } from "/src/context/CartContext";
 import { productsSectionData } from "/src/data/Data";
-import { ShareIcon, CompareIcon, ProductHeartIcon } from "/src/assets/Svg";
+import { ShareIcon, ProductHeartIcon } from "/src/assets/Svg";
+import { toast } from "react-toastify";
+import { toggleLikeProduct } from "/src/features/likes/likesSlice";
 
 function ProductCard({ product }) {
   const [isHovered, setIsHovered] = useState(false);
   const navigate = useNavigate();
+  const dispatch = useDispatch();
   const { addToCart } = useCart();
+  const likedProducts = useSelector((state) => state.likes.items);
+  const isLiked = likedProducts.some((item) => item._id === product._id);
 
   return (
     <div
@@ -70,14 +76,42 @@ function ProductCard({ product }) {
             Add to cart
           </button>
           <div className="flex items-center gap-4 text-white text-sm font-medium">
-            <button className="flex items-center gap-1 hover:text-[#B88E2F] transition-colors">
+            
+              <button 
+              onClick={async (e) => {
+                e.stopPropagation();
+                const productLink = `${window.location.origin}/product/${product._id}`;
+                try {
+                  await navigator.clipboard.writeText(productLink);
+                  toast.success("Product link copied to clipboard!");
+                } catch (err) {
+                  console.error("Failed to copy: ", err);
+                  toast.error("Failed to copy product link.");
+                }
+              }}
+              className="flex items-center gap-1 hover:text-[#B88E2F] transition-colors">
               <ShareIcon /> Share
             </button>
-            <button className="flex items-center gap-1 hover:text-[#B88E2F] transition-colors">
-              <CompareIcon /> Compare
-            </button>
-            <button className="flex items-center gap-1 hover:text-[#B88E2F] transition-colors">
-              <ProductHeartIcon /> Like
+           
+            
+            <button
+              onClick={(e) => {
+                e.stopPropagation();
+                dispatch(
+                  toggleLikeProduct({
+                    _id: product._id,
+                    name: product.name,
+                    price: product.price,
+                    image: product.images?.[0]?.url,
+                  }),
+                );
+                toast.success(isLiked ? "Removed from liked products" : "Added to liked products");
+              }}
+              className={`flex items-center gap-1 transition-colors ${
+                isLiked ? "text-[#B88E2F]" : "hover:text-[#B88E2F]"
+              }`}
+            >
+              <ProductHeartIcon /> {isLiked ? "Liked" : "Like"}
             </button>
           </div>
         </div>
@@ -147,6 +181,7 @@ export default function OurProducts() {
     setPage(nextPage);
     fetchProducts(nextPage, true);
   };
+
 
   if (loading) return <p className="text-center py-16">Loading...</p>;
   if (error) return <p className="text-center py-16 text-red-500">{error}</p>;

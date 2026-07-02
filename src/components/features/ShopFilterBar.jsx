@@ -1,45 +1,15 @@
 import { useState } from "react";
 import { shopFilterData } from "/src/data/Data";
-import { FilterRing, Grid, Viewlist } from "/src/assets/Svg";
 
 const ShopFilterBar = () => {
+  const [showFilter, setShowFilter] = useState(false);
   const [view, setView] = useState("grid");
   const [show, setShow] = useState(16);
 
   return (
     <div className="w-full bg-[#F9F1E7] px-6 py-4 flex items-center justify-between">
       <div className="flex items-center gap-4 px-18">
-        <button
-          className="flex items-center gap-2 text-[20px] font-normal text-[#000000]
-                 hover:text-[#C8A96E] transition-colors"
-        >
-          <FilterRing />
-          {shopFilterData.filterLabel}
-        </button>
 
-        <button
-          onClick={() => setView("grid")}
-          className={`transition-colors ${
-            view === "grid"
-              ? "text-[#000000]"
-              : "text-gray-400 hover:text-[#C8A96E]"
-          }`}
-        >
-          <Grid />
-        </button>
-
-        <button
-          onClick={() => setView("list")}
-          className={`transition-colors ${
-            view === "list"
-              ? "text-[#000000]"
-              : "text-gray-400 hover:text-[#C8A96E]"
-          }`}
-        >
-          <Viewlist />
-        </button>
-
-        <div className="w-px h-6 bg-[#9F9F9F]" />
 
         <span className="text-[16px] text-[#000000] font-normal">
           {shopFilterData.resultText}

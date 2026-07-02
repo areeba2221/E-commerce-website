@@ -1,13 +1,19 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
 import { getProducts } from "/src/api/productAPI";
 import { useCart } from "/src/context/CartContext";
+import { toast } from "react-toastify";
 import { ShareIcon, CompareIcon, ProductHeartIcon } from "/src/assets/Svg";
+import { toggleLikeProduct } from "/src/features/likes/likesSlice";
 
 function ProductCard({ product }) {
   const [isHovered, setIsHovered] = useState(false);
   const navigate = useNavigate();
+  const dispatch = useDispatch();
   const { addToCart } = useCart();
+  const likedProducts = useSelector((state) => state.likes.items);
+  const isLiked = likedProducts.some((item) => item._id === product._id);
 
   const handleAction = (e, callback) => {
     e.stopPropagation();
@@ -61,22 +67,40 @@ function ProductCard({ product }) {
           </button>
           <div className="flex items-center gap-5 text-white text-[16px] font-semibold">
             <button
-              onClick={(e) => handleAction(e, () => console.log("Shared"))}
+            onClick={async (e) => {
+                            e.stopPropagation();
+                            const productLink = `${window.location.origin}/product/${product._id}`;
+                            try {
+                              await navigator.clipboard.writeText(productLink);
+                              toast.success("Product link copied to clipboard!");
+                            } catch (err) {
+                              console.error("Failed to copy: ", err);
+                              toast.error("Failed to copy product link.");
+                            }
+                          }}
               className="flex items-center gap-1 hover:text-[#B88E2F] transition-colors"
             >
               <ShareIcon /> Share
             </button>
             <button
-              onClick={(e) => handleAction(e, () => console.log("Compared"))}
-              className="flex items-center gap-1 hover:text-[#B88E2F] transition-colors"
+              onClick={(e) =>
+                handleAction(e, () => {
+                  dispatch(
+                    toggleLikeProduct({
+                      _id: product._id,
+                      name: product.name,
+                      price: product.price,
+                      image: product.images?.[0]?.url,
+                    }),
+                  );
+                  toast.success(isLiked ? "Removed from liked products" : "Added to liked products");
+                })
+              }
+              className={`flex items-center gap-1 transition-colors ${
+                isLiked ? "text-[#B88E2F]" : "hover:text-[#B88E2F]"
+              }`}
             >
-              <CompareIcon /> Compare
-            </button>
-            <button
-              onClick={(e) => handleAction(e, () => console.log("Liked"))}
-              className="flex items-center gap-1 hover:text-[#B88E2F] transition-colors"
-            >
-              <ProductHeartIcon /> Like
+              <ProductHeartIcon /> {isLiked ? "Liked" : "Like"}
             </button>
           </div>
         </div>
@@ -104,7 +128,7 @@ function ProductCard({ product }) {
   );
 }
 
-export default function ShopProducts() {
+export default function ShopProducts( { searchQuery } ) {
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -113,7 +137,15 @@ export default function ShopProducts() {
 
   useEffect(() => {
     setLoading(true);
-    getProducts(`?page=${currentPage}&limit=12`)
+    setError(null);
+    
+    const params = new URLSearchParams({
+      page: currentPage,
+      limit: 12,
+    });
+    if (searchQuery) params.set("search", searchQuery);
+
+    getProducts(`?${params.toString()}`)
       .then((res) => {
         const data = res.data?.data || [];
         setProducts(Array.isArray(data) ? data : []);
@@ -125,7 +157,7 @@ export default function ShopProducts() {
         setError("Products is not load");
         setLoading(false);
       });
-  }, [currentPage]);
+  } , [currentPage, searchQuery]);
 
   const renderPageButtons = () => {
     const buttons = [];
@@ -152,6 +184,13 @@ export default function ShopProducts() {
   if (loading)
     return <p className="text-center py-16 text-[#3A3A3A]">Loading...</p>;
   if (error) return <p className="text-center py-16 text-red-500">{error}</p>;
+
+  if (products.length === 0)
+    return (
+      <p className="text-center py-16 text-[#3A3A3A]">
+        {searchQuery ? `No products match "${searchQuery}".` : "No products found."}
+      </p>
+    );
 
   return (
     <section className="py-16 px-4 max-w-[1240px] mx-auto flex flex-col items-center gap-16">

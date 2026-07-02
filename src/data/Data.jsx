@@ -271,11 +271,11 @@ export const shopHeroData = {
 //ShopFilterBar Data
 export const shopFilterData = {
   filterLabel: "Filter",
-  resultText: "Showing 1–16 of 32 results",
+  resultText: "Showing 1–12 of 14 results",
   showLabel: "Show",
-  sortLabel: "Short by",
+  sortLabel: "Sort by",
 
-  showOptions: [16, 32],
+  showOptions: [12, 14],
 
   sortOptions: [
     "Default",
